@@ -1,19 +1,45 @@
+// import React from 'react'
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Wrapper from "./components/Wrapper/Wrapper";
+
+import Home from "./pages/Home";
+import Search from "./pages/Search";
+import Login from "./pages/Login";
+
+//import Footer from "./components/Footer";
+//import logo from './logo.svg';
+//import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      loggedIn: false,
+      name: "",
+      activeTab: "Home",
+      List: ""
+    }
+  
+  }
   render() {
+    // let activeTab = this.state.activeTab;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div>
+          <Navbar />
+          {/* activeTab ={this.state.activeTab}  */}
+          {/* improper format of data transfered */}
+          <Wrapper>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/search" component={Search} />
+            <Route exact path="/login" component={Login} />
+          </Wrapper>
+          {/* <Footer /> */}  
+        </div>
+      </Router>
     );
   }
 }
