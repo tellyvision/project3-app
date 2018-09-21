@@ -18,20 +18,17 @@ class App extends Component {
 
     this.state = {
       loggedIn: false,
-      name: "",
-      activeTab: "Home",
+      userId: "",
+      username: "",
       List: ""
     }
   
   }
   render() {
-    // let activeTab = this.state.activeTab;
     return (
       <Router>
         <div>
           <Navbar />
-          {/* activeTab ={this.state.activeTab}  */}
-          {/* improper format of data transfered */}
           <Wrapper>
             <Route exact path="/" component={Home} />
             <Route exact path="/search" component={Search} />
