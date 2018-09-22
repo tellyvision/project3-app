@@ -1,19 +1,43 @@
+// import React from 'react'
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Wrapper from "./components/Wrapper/Wrapper";
+
+import Home from "./pages/Home";
+import Search from "./pages/Search";
+import Login from "./pages/Login";
+
+//import Footer from "./components/Footer";
+//import logo from './logo.svg';
+//import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      loggedIn: false,
+      userId: "",
+      username: "",
+      List: "",
+      Search: ""
+    }
+  
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div>
+          <Navbar />
+          <Wrapper>
+            <Route exact path="/" component={Home} />
+            <Route path="/search" component={Search} Search={this.state.Search} />
+            <Route exact path="/login" component={Login} />
+          </Wrapper>
+          {/* <Footer /> */}  
+        </div>
+      </Router>
     );
   }
 }
