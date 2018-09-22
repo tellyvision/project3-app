@@ -1,12 +1,15 @@
 // import React from 'react'
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter , Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Wrapper from "./components/Wrapper/Wrapper";
+import createHistory from "history/createBrowserHistory";
 
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Login from "./pages/Login";
+
+const history = createHistory();
 
 //import Footer from "./components/Footer";
 //import logo from './logo.svg';
@@ -27,17 +30,17 @@ class App extends Component {
   }
   render() {
     return (
-      <Router>
+      <BrowserRouter history={history}>
         <div>
-          <Navbar />
-          <Wrapper>
-            <Route exact path="/" component={Home} />
-            <Route path="/search" component={Search} Search={this.state.Search} />
-            <Route exact path="/login" component={Login} />
-          </Wrapper>
+          <Route component={Navbar} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/search" component={Search}  />
+              <Route exact path="/login" component={Login} />
+            </Switch>
           {/* <Footer /> */}  
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
