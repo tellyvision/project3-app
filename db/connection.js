@@ -1,4 +1,4 @@
-var mysql = require("mysql");
+var mysql = require("mysql2");
 var connection;
 
 
@@ -9,7 +9,7 @@ if(process.env.JAWSDB_URL) {
         host     : 'localhost',
         user     : 'root',
         password : 'root',
-        database : 'project3',
+        database : 'DogShare_Proj3',
         port     : 3306,
         multipleStatements  : true
     });
