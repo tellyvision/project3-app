@@ -17,7 +17,22 @@ class Search extends Component {
                     <SearchSelector />
                 </div>
 
+{/*                 
+                {window.location.pathname === "/search/breed"
+                ? <Breed />
+                : <SocialChildren />} */}
                 <div>
+                    {
+                        window.location.pathname === "/search/breed" && <Breed />
+                    ||  window.location.pathname === "/search/activeness" && <Activeness />
+                    ||  window.location.pathname === "/search/size" && <Size />
+                    ||  window.location.pathname === "/search/socialdog" && <SocialDog />
+                    ||  window.location.pathname === "/search/socialpeople" && <SocialPeople />
+                    || <SocialChildren />}
+
+                </div>
+
+                {/* <div>
                     {this.props.Search == "Activeness" && <Activeness />
 
                     || this.props.Search == "Breed" &&
@@ -31,7 +46,7 @@ class Search extends Component {
                     ||
                         <SocialChildren />
             }
-                </div>
+                </div> */}
             </div>
         )
     }
