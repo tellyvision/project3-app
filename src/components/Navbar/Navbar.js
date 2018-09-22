@@ -6,20 +6,28 @@ class Navbar extends Component {
         super(props);
     }
 
+    
+
     render() {
         return(
-        <nav className="navbar navbar-light" containerStyle="background-color: #e3f2fd">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" containerStyle="background-color: #e3f2fd">
             <Link to ="/" className="navbar-brand">Dogs</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item"><Link to ="/">Home</Link></li>
-                    {/* {(props.activeTab == "Home") ? "active" : ""} */}
-
-                    <li className="nav-item"><Link to ="/search">Search</Link></li>
-                    <li className="nav-item"><Link to ="/login">Log In</Link></li>
+                    <li className={window.location.pathname === "/"
+                ? "nav-item nav-link active"
+                : "nav-item nav-link"}><Link to ="/">Home</Link></li>
+                    <li className={window.location.pathname === "/search"
+                ? "nav-item nav-link active"
+                : "nav-item nav-link"}><Link to ="/search">Search</Link></li>
+                    <li className={window.location.pathname === "/login"
+                ? "nav-item nav-link active"
+                : "nav-item nav-link"}><Link to ="/login">Log In</Link></li>
                 </ul>
+            </div>
         </nav>
         )
     }
