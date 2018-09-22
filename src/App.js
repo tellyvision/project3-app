@@ -20,7 +20,8 @@ class App extends Component {
       loggedIn: false,
       userId: "",
       username: "",
-      List: ""
+      List: "",
+      Search: ""
     }
   
   }
@@ -31,7 +32,7 @@ class App extends Component {
           <Navbar />
           <Wrapper>
             <Route exact path="/" component={Home} />
-            <Route exact path="/search" component={Search} />
+            <Route path="/search" component={Search} Search={this.state.Search} />
             <Route exact path="/login" component={Login} />
           </Wrapper>
           {/* <Footer /> */}  
