@@ -1,0 +1,18 @@
+get:
+search list bar
+dog info page
+
+
+post:
+usercreation (unless handled by passport)
+dog creation
+dog renting (trafficking, or however we say it)
+
+put:
+user modification (of account)
+dog info change
+
+delete:
+remove dog/killed dog
+remove rental time of dog
+user deletion (unless handled by passport)

@@ -4,6 +4,8 @@ USE DogShare_Proj3;
 CREATE TABLE IF NOT EXISTS userInfo(
     user_id int primary key auto_increment,
     user_name varchar(200) not null,
+    user_password varchar(20) not null,
+    user_email varchar(200) not null,
     user_addr varchar(300) not null,
     user_postal varchar(6) not null
 );
@@ -26,7 +28,7 @@ CREATE TABLE IF NOT EXISTS bookingInfo(
     booking_id int primary key auto_increment,
     booking_dog_id int not null,
     lender_id int not null,
-    borrower_id int not null,
+    borrower_id int default null,
     booking_date datetime not null,
     foreign key fk_dog(booking_dog_id) references dogInfo(dog_id),
     foreign key fk_lender(lender_id) references userInfo(user_id),
