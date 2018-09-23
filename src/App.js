@@ -1,8 +1,8 @@
-// import React from 'react'
 import React, { Component } from 'react';
 import { BrowserRouter , Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Wrapper from "./components/Wrapper/Wrapper";
+//import Wrapper from "./components/Wrapper/Wrapper";
+//import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
 
 import Home from "./pages/Home";
@@ -11,7 +11,6 @@ import Login from "./pages/Login";
 
 const history = createHistory();
 
-//import Footer from "./components/Footer";
 //import logo from './logo.svg';
 //import './App.css';
 
@@ -24,7 +23,6 @@ class App extends Component {
       userId: "",
       username: "",
       List: "",
-      Search: ""
     }
   
   }
