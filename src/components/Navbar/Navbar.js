@@ -6,8 +6,6 @@ class Navbar extends Component {
         super(props);
     }
 
-    
-
     render() {
         return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light" containerStyle="background-color: #e3f2fd">
@@ -26,6 +24,7 @@ class Navbar extends Component {
                     <li className={window.location.pathname === "/login"
                 ? "nav-item nav-link active"
                 : "nav-item nav-link"}><Link to ="/login">Log In</Link></li>
+                {/* TODO: Conditional rendering if logged in, show profile instead of login */}
                 </ul>
             </div>
         </nav>
