@@ -98,6 +98,8 @@ class Login extends Component {
             </div>
 
           </form>
+          {/* Don't have an account? <Link to="/userRegister">Sign up today</Link> */}
+          {/* Use this register link if you want, Thy */}
         </div>
       )
     }

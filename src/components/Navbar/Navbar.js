@@ -25,7 +25,6 @@ logout(event) {
 }
 
 render() {
-	const loggedIn = this.props.loggedIn;
 	console.log('navbar render, props: ')
 	console.log(this.props);
         return(
@@ -47,16 +46,23 @@ render() {
 				: "nav-item nav-link"}><Link to ="/search">Search</Link>
 				</li>
 				
-                <li className={window.location.pathname === "/login"
+                {(this.props.loggedIn === false) ?
+                    <li className={window.location.pathname === "/login"
+                        ? "nav-item nav-link active"
+                        : "nav-item nav-link"}><Link to ="/login">Log In</Link>
+                    </li>
+
+                    && //can't add both li using either || or &&, only accepts one argument
+                    
+                    <li className={window.location.pathname === "/userRegister"
+                        ? "nav-item nav-link active"
+                        : "nav-item nav-link"}><Link to ="/userRegister">Register</Link>
+                    </li>
+                :  <li className={window.location.pathname === "/profile"
                 ? "nav-item nav-link active"
-				: "nav-item nav-link"}><Link to ="/login">Log In</Link>
-				</li>
-				
-				<li className={window.location.pathname === "/userRegister"
-				? "nav-item nav-link active"
-				: "nav-item nav-link"}><Link to ="/userRegister">Register</Link>
-				</li>
-                {/* TODO: Conditional rendering if logged in, show profile instead of login */}
+                : "nav-item nav-link"}><Link to ="/profile">Profile</Link>
+                    </li>
+                }
                 </ul>
             </div>
         </nav>

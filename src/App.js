@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
+import ProfilePerson from "./pages/ProfilePerson";
 //import Wrapper from "./components/Wrapper/Wrapper";
 //import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
@@ -66,7 +67,7 @@ class App extends Component {
     return (
       <BrowserRouter history={history}>
         <div>
-          <Route component={Navbar} />
+          <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} />} />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/search" component={Search}  />
@@ -82,6 +83,7 @@ class App extends Component {
                 render={() =>
                   <UserRegister/>}
               />
+              <Route exact path="/profile" component={ProfilePerson} />
             </Switch>
           {/* <Footer /> */}  
         </div>
