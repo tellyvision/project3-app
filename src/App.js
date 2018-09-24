@@ -23,7 +23,7 @@ class App extends Component {
 
     this.state = {
       loggedIn: false,
-      username: null,
+      email: null,
       List: "",
     }
   
@@ -50,13 +50,13 @@ class App extends Component {
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          email: response.data.user.email
         })
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null
+          email: null
         })
       }
     })

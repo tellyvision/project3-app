@@ -3,7 +3,7 @@ mongoose.Promise = global.Promise
 
 //your local database url
 //27017 is the default mongoDB port
-const uri = 'mongodb://localhost:27017/simple-mern-passport' 
+const uri = 'mongodb://localhost:27017/DogShare_Proj3' 
 
 mongoose.connect(uri, {
 	useCreateIndex: true,
@@ -18,7 +18,6 @@ mongoose.connect(uri, {
 		/** handle initial connection error */ 
 		console.log('error connecting to Mongo: ')
 		console.log(err);
-		
 		}
   );
 
