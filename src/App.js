@@ -67,7 +67,7 @@ class App extends Component {
     return (
       <BrowserRouter history={history}>
         <div>
-          <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} />} />
+          <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/search" component={Search}  />
