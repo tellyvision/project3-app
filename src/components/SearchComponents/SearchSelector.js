@@ -7,15 +7,17 @@ class SearchSelector extends Component {
     }
     render() {
       return (
-        <select onChange={this.onChange.bind(this)}>
-            <option selected>Search Criteria</option>
-            <option className="dropdown-item" value="search/activeness">Activeness</option>
-            <option className="dropdown-item" value="search/breed">Breed</option>
-            <option className="dropdown-item" value="search/size">Size</option>
-            <option className="dropdown-item" value="search/socialchildren">Socialability with Children</option>
-            <option className="dropdown-item" value="search/socialdog">Socialability with Other Dogs</option>
-            <option className="dropdown-item" value="search/socialpeople">Socialability with Other People</option>
-        </select>
+        <div className="input-group">
+          <select className="custom-select" onChange={this.onChange.bind(this)}>
+              <option selected>Search Criteria</option>
+              <option className="dropdown-item" value="search/activeness">Activeness</option>
+              <option className="dropdown-item" value="search/breed">Breed</option>
+              <option className="dropdown-item" value="search/size">Size</option>
+              <option className="dropdown-item" value="search/socialchildren">Socialability with Children</option>
+              <option className="dropdown-item" value="search/socialdog">Socialability with Other Dogs</option>
+              <option className="dropdown-item" value="search/socialpeople">Socialability with Other People</option>
+          </select>
+        </div>
       );
     }
   }
