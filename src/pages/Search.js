@@ -17,10 +17,6 @@ class Search extends Component {
                     <SearchSelector />
                 </div>
 
-{/*                 
-                {window.location.pathname === "/search/breed"
-                ? <Breed />
-                : <SocialChildren />} */}
                 <div>
                     {
                         window.location.pathname === "/search/breed" && <Breed />
@@ -28,25 +24,14 @@ class Search extends Component {
                     ||  window.location.pathname === "/search/size" && <Size />
                     ||  window.location.pathname === "/search/socialdog" && <SocialDog />
                     ||  window.location.pathname === "/search/socialpeople" && <SocialPeople />
-                    || <SocialChildren />}
-
+                    || <SocialChildren />
+                    }
                 </div>
 
-                {/* <div>
-                    {this.props.Search == "Activeness" && <Activeness />
-
-                    || this.props.Search == "Breed" &&
-                        <Breed />
-                    || this.props.Search == "Size" &&
-                        <Size />
-                    || this.props.Search == "SocialDog" &&
-                        <SocialDog />
-                    || this.props.Search == "SocialPeople" &&
-                        <SocialPeople />
-                    ||
-                        <SocialChildren />
-            }
-                </div> */}
+                <div>
+                    {/* TODO: Pile on search results */}
+                    {/* {window.location.pathname === "/search/results" && } */}
+                </div>
             </div>
         )
     }

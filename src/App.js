@@ -1,10 +1,10 @@
-// import React from 'react'
 import React, { Component } from 'react';
 import axios from 'axios'
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Wrapper from "./components/Wrapper/Wrapper";
-import createHistory from "./history/createBrowserHistory";
+//import Wrapper from "./components/Wrapper/Wrapper";
+//import Footer from "./components/Footer";
+import createHistory from "history/createBrowserHistory";
 
 //Pages
 import Home from "./pages/Home";
@@ -14,7 +14,6 @@ import UserRegister from "./pages/UserRegister";
 
 const history = createHistory();
 
-//import Footer from "./components/Footer";
 //import logo from './logo.svg';
 //import './App.css';
 
@@ -26,7 +25,6 @@ class App extends Component {
       loggedIn: false,
       username: null,
       List: "",
-      Search: ""
     }
   
    
