@@ -8,7 +8,9 @@ module.exports = function(app){
     ///////////////////
 
     // get request for search bar
-    app.get('/api/search', function(req, res) {
+    app.get('/api/search?*', function(req, res) {
+        console.log(req.body);
+        console.log(req.params);
         let query = `select * from dogInfo where ${req.body.category} = ${req.body.searchKey}`;    
         connection.query(query, (err, data) => {
             if(err) {
@@ -41,6 +43,7 @@ module.exports = function(app){
             }
             return true;
         })
+        res.json('test')
     })
 
     ///////////////////

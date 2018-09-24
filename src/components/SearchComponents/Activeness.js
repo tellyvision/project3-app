@@ -1,5 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import $ from 'jquery';
+import axios from 'axios';
+
+function activenessSearch(){
+    axios.get('/api/search', {
+        params:{
+            column: 'activeness',
+            columnVar: $('#inputGroupSelect04').value
+        }
+    })
+    .then(function(res){
+        console.log(res);
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+}
 
 const Activeness = (props) => {
     return(
@@ -11,7 +28,7 @@ const Activeness = (props) => {
             <option value="3">Three</option>
         </select>
         <div className="input-group-append">
-            <button className="btn btn-outline-secondary" type="button">Search</button>
+            <button className="btn btn-outline-secondary" type="button" onClick={activenessSearch()}>Search</button>
         </div>
         </div>
     )
