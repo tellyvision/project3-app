@@ -8,17 +8,28 @@ module.exports = function(app){
     ///////////////////
 
     // get request for search bar
-    app.get('/api/search?*', function(req, res) {
-        console.log(req.body);
-        console.log(req.params);
-        let query = `select * from dogInfo where ${req.body.category} = ${req.body.searchKey}`;    
-        connection.query(query, (err, data) => {
-            if(err) {
-                console.log(err);
-                return false;
-            }
-            res.json(data);  
-        })
+    app.get('/api/search*', function(req, res) {
+        console.log(req.query.column);
+        console.log(req.query.columnVar);
+        // console.log(req.params);
+        //str = str.replace(/"/g,"")
+        
+            let SQLquery = "select * from dogInfo where " + req.query.column + " = " + req.query.columnVar;    
+
+            connection.query(SQLquery, (err, data) => {
+                if(err) {
+                    console.log(err);
+                    return false;
+                }
+                // resolve(data);
+                // res.json(data);  
+                
+            
+                res.json(data)
+        
+        });
+        // let query = `select * from dogInfo where ${connection.escape(req.query.column)} = ${connection.escape(req.query.columnVal)}`;    
+        
     });
 
     // get request for get dog info

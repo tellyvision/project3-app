@@ -1,6 +1,7 @@
 var express = require('express');
 var body_parser = require('body-parser');
 var methodOverride = require('method-override');
+var cors = require('cors')
 var path = require('path');
 
 var app = express();
@@ -9,6 +10,8 @@ app.use(body_parser.json());
 app.use(body_parser.urlencoded({
   extended: false
 }));
+
+app.use(cors());
 
 // app.use(express.static(path.join(__dirname + '/public')));
 

@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "jquery": "^3.3.1",
     "method-override": "^3.0.0",
@@ -17,11 +18,12 @@
     "react-scripts": "1.1.5"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"node server.js\"",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "concurrently \"react-scripts test --env=jsdom\" \"node server.js\"",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "server.js",
   "repository": {
