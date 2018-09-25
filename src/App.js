@@ -25,7 +25,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: null,
-      List: "",
+      List: [],
     }
   
    
@@ -70,7 +70,7 @@ class App extends Component {
           <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/search" component={Search}  />
+              <Route path="/search" render={(props) => <Search {...props} list = {this.state.List}  />} />
               <Route
                 path="/login"
                 render={() =>

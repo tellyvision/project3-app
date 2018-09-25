@@ -6,11 +6,11 @@ import Size from "../components/SearchComponents/Size"
 import SocialChildren from "../components/SearchComponents/SocialChildren"
 import SocialDog from "../components/SearchComponents/SocialDog"
 import SocialPeople from "../components/SearchComponents/SocialPeople"
-
+import ResultsCard from "../components/Results/ResultsCard"
 
 class Search extends Component {
 
-    render() {
+    render() {  
         return(
             <div className="container">
                 <div className="row">
@@ -30,8 +30,9 @@ class Search extends Component {
                     </div>
 
                     <div>
-                        {/* TODO: Pile on search results */}
-                        {/* {window.location.pathname === "/search/results" && } */}
+                        {window.location.pathname === "/search/results" && this.props.list.map((dog) => (
+                            <ResultsCard dog_id={dog.dog_id} picture={dog.picture} name={dog.name} breed={dog.breed} size={dog.size} />
+                        ))}
                     </div>
                 </div>
             </div>

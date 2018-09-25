@@ -7,12 +7,12 @@ const navStyle= {
     "margin-bottom": "15px"
 }
 
-const unloggedinArray = [{ name: "Home", url: "/Home" },
+const unloggedinArray = [{ name: "Home", url: "/" },
 { name: "Search", url: "/Search" },
 { name: "Register", url: "/userRegister" },
  { name: "Log In", url: "/login" }];
 
- const loggedinArray = [{ name: "Home", url: "/Home" },
+ const loggedinArray = [{ name: "Home", url: "/" },
  { name: "Search", url: "/Search" },
  { name: "Profile", url: "/Profile" }];
 
