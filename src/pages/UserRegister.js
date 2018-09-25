@@ -72,7 +72,7 @@ render() {
 					</div>
 					<div className="col-3 col-mr-auto">
 						<input className="form-input"
-							placeholder="password"
+							placeholder="Password"
 							type="password"
 							name="password"
 							value={this.state.password}

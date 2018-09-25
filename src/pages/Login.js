@@ -80,7 +80,7 @@ class Login extends Component {
               </div>
               <div className="col-3 col-mr-auto">
                 <input className="form-input"
-                  placeholder="password"
+                  placeholder="Password"
                   type="password"
                   name="password"
                   value={this.state.password}
@@ -98,6 +98,8 @@ class Login extends Component {
             </div>
 
           </form>
+          {/* Don't have an account? <Link to="/userRegister">Sign up today</Link> */}
+          {/* Use this register link if you want, Thy */}
         </div>
       )
     }
