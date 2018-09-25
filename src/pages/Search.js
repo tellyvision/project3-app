@@ -12,41 +12,28 @@ class Search extends Component {
 
     render() {
         return(
-            <div>
-                <div>
-                    <SearchSelector />
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-3">
+                        <SearchSelector />
+                    </div>
+
+                    <div className="col-md-9">
+                        {
+                            window.location.pathname === "/search/breed" && <Breed />
+                        ||  window.location.pathname === "/search/activeness" && <Activeness />
+                        ||  window.location.pathname === "/search/size" && <Size />
+                        ||  window.location.pathname === "/search/socialdog" && <SocialDog />
+                        ||  window.location.pathname === "/search/socialpeople" && <SocialPeople />
+                        || <SocialChildren />
+                        }
+                    </div>
+
+                    <div>
+                        {/* TODO: Pile on search results */}
+                        {/* {window.location.pathname === "/search/results" && } */}
+                    </div>
                 </div>
-
-{/*                 
-                {window.location.pathname === "/search/breed"
-                ? <Breed />
-                : <SocialChildren />} */}
-                <div>
-                    {
-                        window.location.pathname === "/search/breed" && <Breed />
-                    ||  window.location.pathname === "/search/activeness" && <Activeness />
-                    ||  window.location.pathname === "/search/size" && <Size />
-                    ||  window.location.pathname === "/search/socialdog" && <SocialDog />
-                    ||  window.location.pathname === "/search/socialpeople" && <SocialPeople />
-                    || <SocialChildren />}
-
-                </div>
-
-                {/* <div>
-                    {this.props.Search == "Activeness" && <Activeness />
-
-                    || this.props.Search == "Breed" &&
-                        <Breed />
-                    || this.props.Search == "Size" &&
-                        <Size />
-                    || this.props.Search == "SocialDog" &&
-                        <SocialDog />
-                    || this.props.Search == "SocialPeople" &&
-                        <SocialPeople />
-                    ||
-                        <SocialChildren />
-            }
-                </div> */}
             </div>
         )
     }
