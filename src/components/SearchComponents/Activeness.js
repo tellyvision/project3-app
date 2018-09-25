@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 import $ from 'jquery';
 import axios from 'axios';
@@ -18,6 +19,7 @@ function activenessSearch(){
         console.log(err);
     });
 }
+
 
 const Activeness = (props) => {
     return(

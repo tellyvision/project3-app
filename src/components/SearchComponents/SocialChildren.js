@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
 
 const SocialChildren = (props) => {
     return(
         <div className="input-group">
+
         <select className="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
             <option selected disabled="disabled">Choose How Social The Dog Will Be With Children...</option>
             <option value="1">One (not very social)</option>
@@ -16,6 +15,7 @@ const SocialChildren = (props) => {
         <div className="input-group-append">
             <button className="btn btn-outline-secondary" type="button">Search</button>
         </div>
+
         </div>
     )
 }

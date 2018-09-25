@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const SocialPeople = (props) => {
     return(
@@ -13,7 +12,7 @@ const SocialPeople = (props) => {
                 <option value="5">Five (very social)</option>
             </select>
             <div className="input-group-append">
-                <button className="btn btn-outline-secondary" type="button">Button</button>
+                <button className="btn btn-outline-secondary" type="button">Search</button>
             </div>
         </div>
     )
