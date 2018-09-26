@@ -6,7 +6,7 @@ import Size from "../components/SearchComponents/Size"
 import SocialChildren from "../components/SearchComponents/SocialChildren"
 import SocialDog from "../components/SearchComponents/SocialDog"
 import SocialPeople from "../components/SearchComponents/SocialPeople"
-import ResultsCard from "../components/Results/ResultsCard"
+import ResultsCard from "../components/Results/ResultsCard";
 
 class Search extends Component {
 

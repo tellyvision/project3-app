@@ -38,16 +38,15 @@ class DogRegister extends Component {
         })
     }
 
-
     render() {
         return(
             <form>
                 <div className="form-group">
-                    <input className="form-control" type="text" placeholder="Dog's Name" id="dog_name_input"></input>
+                    <input className="form-control" type="text" placeholder="Dog's Name" id="dog_name_input" onChange={this.handleChange}></input>
                 </div>
                 <div className="form-group">
                     <label for="breed">What is your dog's breed</label>
-                    <select className="form-control" id="breed_select">
+                    <select className="form-control" id="breed_select" onChange={this.handleChange}>
                         <option value="Appenzeller Sennenhunde">Appenzeller Sennenhunde</option>
                         <option value="Beagle">Beagle</option>
                         <option value="Bulldog">Bulldog</option>
