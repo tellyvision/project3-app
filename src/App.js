@@ -3,6 +3,7 @@ import axios from 'axios'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import ProfilePerson from "./pages/ProfilePerson";
+import DogRegister from "./pages/DogRegister";
 //import Wrapper from "./components/Wrapper/Wrapper";
 //import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
@@ -84,6 +85,7 @@ class App extends Component {
                   <UserRegister/>}
               />
               <Route exact path="/profile" component={ProfilePerson} />
+              <Route path="/*/register" component={DogRegister} />
             </Switch>
           {/* <Footer /> */}  
         </div>

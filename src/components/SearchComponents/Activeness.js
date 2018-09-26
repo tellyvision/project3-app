@@ -38,5 +38,5 @@ const Activeness = (props) => {
         </div>
     )
 }
-//1-5
+
 export default Activeness;
