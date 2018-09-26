@@ -26,6 +26,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: null,
+      user_id: null,
       List: [],
     }
   
@@ -85,7 +86,7 @@ class App extends Component {
                   <UserRegister/>}
               />
               <Route exact path="/profile" component={ProfilePerson} />
-              <Route path="/*/register" component={DogRegister} />
+              <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
             </Switch>
           {/* <Footer /> */}  
         </div>

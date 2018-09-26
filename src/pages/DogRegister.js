@@ -2,6 +2,43 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 class DogRegister extends Component {
+    constructor(props) {
+		super(props)
+		this.state = {
+            dog_name: "", 
+            size: "", 
+            breed: "", 
+            activeness: "", 
+            microchip: "", 
+            social_children: "", 
+            social_ppl: "", 
+            social_dog: ""
+		}
+        this.registerDog = this.registerDog.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+    }
+    
+    handleChange(event) {
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	}
+
+    registerDog() {
+        axios.post("/api/dog-profile", {
+            owner_id: this.props.user_id, 
+            dog_name: this.state.dog_name, 
+            size: this.state.size, 
+            breed: this.state.breed, 
+            activeness: this.state.activeness, 
+            microchip: this.state.microchip, //double check this later
+            social_children: this.state.social_children, 
+            social_ppl: this.state.social_people, 
+            social_dog: this.state.social_dog
+        })
+    }
+
+
     render() {
         return(
             <form>
@@ -10,7 +47,7 @@ class DogRegister extends Component {
                 </div>
                 <div className="form-group">
                     <label for="breed">What is your dog's breed</label>
-                    <select className="form-control" id="exampleFormControlSelect1">
+                    <select className="form-control" id="breed_select">
                         <option value="Appenzeller Sennenhunde">Appenzeller Sennenhunde</option>
                         <option value="Beagle">Beagle</option>
                         <option value="Bulldog">Bulldog</option>
@@ -55,8 +92,8 @@ class DogRegister extends Component {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label for="socialChildren">How social is your dog with children?</label>
-                    <select className="form-control" id="exampleFormControlSelect1">
+                    <label for="social_children">How social is your dog with children?</label>
+                    <select className="form-control" id="social_children_select">
                         <option value="1">One (not very social)</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -65,8 +102,8 @@ class DogRegister extends Component {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label for="exampleFormControlSelect1">How social is your dog with people?</label>
-                    <select className="form-control" id="exampleFormControlSelect1">
+                    <label for="social_people">How social is your dog with people?</label>
+                    <select className="form-control" id="social_people_select">
                         <option value="1">One (not very social)</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -75,8 +112,8 @@ class DogRegister extends Component {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label for="exampleFormControlSelect1">How social is your dog with other dogs?</label>
-                    <select className="form-control" id="exampleFormControlSelect1">
+                    <label for="social_dog">How social is your dog with other dogs?</label>
+                    <select className="form-control" id="social_dog_select">
                         <option value="1">One (not very social)</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -85,7 +122,7 @@ class DogRegister extends Component {
                     </select>
                 </div>
                 <div className="form-group">
-                <label for="exampleFormControlSelect1">Does your dog have a microchip?</label>
+                <label for="microchip">Does your dog have a microchip?</label>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" />
                         <label className="form-check-label" for="inlineRadioYes">Yes</label>
@@ -95,7 +132,7 @@ class DogRegister extends Component {
                         <label className="form-check-label" for="inlineRadioNo">No</label>
                     </div>
                 </div>
-                <button type="button" className="btn btn-secondary">Register</button>
+                <button type="button" className="btn btn-secondary" onClick={this.registerDog}>Register</button>
                 <button type="reset" className="btn btn-danger">Cancel</button>
 
             </form>
