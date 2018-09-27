@@ -1,5 +1,25 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+import $ from 'jquery';
+import axios from 'axios';
+
+function sizeSearch(){
+    axios.get('http://localhost:3001/api/search', {
+        params:{
+            column: 'size',
+            columnVar: $('#inputGroupSelect04').val()
+        }
+    })
+    .then(function(res){
+        console.log("res: ")
+        console.log(res);
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+}
+
 const Size = (props) => {
     return(
         <div className="input-group">
@@ -11,7 +31,7 @@ const Size = (props) => {
             <option value="3">Large size (55+ pbs)</option>
         </select>
         <div className="input-group-append">
-            <button className="btn btn-outline-secondary" type="button">Button</button>
+            <button className="btn btn-outline-secondary" type="button" onClick={sizeSearch}>Button</button>
         </div>
 
         </div>

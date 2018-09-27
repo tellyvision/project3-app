@@ -1,5 +1,25 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+import $ from 'jquery';
+import axios from 'axios';
+
+function socialPplSearch(){
+    axios.get('http://localhost:3001/api/search', {
+        params:{
+            column: 'social_ppl',
+            columnVar: $('#inputGroupSelect04').val()
+        }
+    })
+    .then(function(res){
+        console.log("res: ")
+        console.log(res);
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
+}
+
 const SocialPeople = (props) => {
     return(
         <div className="input-group">
@@ -12,7 +32,7 @@ const SocialPeople = (props) => {
                 <option value="5">Five (very social)</option>
             </select>
             <div className="input-group-append">
-                <button className="btn btn-outline-secondary" type="button">Search</button>
+                <button className="btn btn-outline-secondary" type="button" onClick={socialPplSearch}>Search</button>
             </div>
         </div>
     )
