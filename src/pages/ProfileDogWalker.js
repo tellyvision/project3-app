@@ -1,20 +1,22 @@
 //allows user to book dog to walk
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
-// dog_name: "", 
-// size: "", 
-// breed: "", 
-// activeness: "", 
-// microchip: "", 
-// social_children: "", 
-// social_ppl: "", 
-// social_dog: ""
+import { Redirect } from "react-router-dom";
 
 class DogWalkerBook extends Component {
     constructor(props) {
-		super(props);	
-	}
+        super(props);
+        this.state = {
+            redirectTo: null
+        }	
+    }
+
+    
+    
+    bookDog() {
+
+    }
+
+
 
     render() {
         return(
@@ -24,6 +26,20 @@ class DogWalkerBook extends Component {
                     <h5 className="mt-0">{this.props.name}</h5>
                     <p>Breed: {this.props.breed}</p>
                     <p>Size Range: {this.props.size}</p>
+                    <p>Activeness: {this.props.activeness}</p>
+                    <p>Sociability with Children: {this.props.social_children}</p>
+                    <p>Sociability with People: {this.props.social_ppl}</p>
+                    <p>Sociability with Other Dogs: {this.props.social_dog}</p>
+                    <button
+                        className="btn btn-secondary col-1 col-mr-auto"
+                        onClick={this.bookDog}
+                        type="button">Book
+                    </button>
+                    <button
+                        className="btn btn-danger col-1 col-mr-auto"
+                        onClick={this.handleSubmit}
+                        type="button">Back
+                    </button>
                 </div>
             </div>
         )

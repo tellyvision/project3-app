@@ -100,7 +100,7 @@ class App extends Component {
               />
               <Route exact path="/profile" component={ProfilePerson} />
               <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
-              <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
+              <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
             </Switch>
           {/* <Footer /> */}  
         </div>
