@@ -58,7 +58,7 @@ class Search extends Component {
 
                     <div>
                         {window.location.pathname === "/search/results" && this.state.dataFromSearchComp.map((dog) => (
-                           <ResultsCard dog_id={dog.dog_id} picture={dog.picture} name={dog.name} breed={dog.breed} size={dog.size} />
+                           <ResultsCard key={dog.dog_id} dog_id={dog.dog_id} picture={dog.picture} name={dog.name} breed={dog.breed} size={dog.size} />
                         ))}
                      </div>
                 </div>

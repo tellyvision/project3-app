@@ -7,14 +7,15 @@ const navStyle= {
     "margin-bottom": "15px"
 }
 
-const unloggedinArray = [{ name: "Home", url: "/Home" },
+const unloggedinArray = [{ name: "Home", url: "/" },
 { name: "Search", url: "/Search" },
 { name: "Register", url: "/userRegister" },
  { name: "Log In", url: "/login" }];
 
- const loggedinArray = [{ name: "Home", url: "/Home" },
+const loggedinArray = [{ name: "Home", url: "/" },
  { name: "Search", url: "/Search" },
- { name: "Profile", url: "/Profile" }];
+ { name: "Profile", url: "/Profile" },
+ { name: "Your Dogs", url: "/YourDogs" }]; //need to change this to below
 
 class Navbar extends Component {
 	constructor(props) {
@@ -67,6 +68,11 @@ class Navbar extends Component {
                                         : "nav-item nav-link"}><Link to ={x.url}>{x.name}</Link>
                                     </li>
                                 ))}
+                                    {/* <li className={window.location.pathname === {"/"+{this.props.username}+"/dogs"}
+                                        ? "nav-item nav-link active"
+                                        : "nav-item nav-link"}><Link to ={x.url}>{x.name}</Link> 
+                                    </li>*/}
+
                                     <li className= "nav-item nav-link">
                                         <Link to ="/user/logout" onClick={this.logout}>Log Out</Link>
                                     </li> 
