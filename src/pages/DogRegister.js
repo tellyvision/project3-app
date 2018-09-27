@@ -74,15 +74,15 @@ class DogRegister extends Component {
                 </div>
                 <div className="form-group">
                     <label for="size">How large is your dog?</label>
-                    <select className="form-control" id="size">
-                        <option value="1">Small size (0-25 kg)</option>
-                        <option value="2">Medium size(26-54 pbs)</option>
-                        <option value="3">Large size (55+ pbs)</option>
+                    <select className="form-control" id="size" onChange={this.handleChange}>
+                        <option value="1">Small size (0-25 lbs)</option>
+                        <option value="2">Medium size(26-54 lbs)</option>
+                        <option value="3">Large size (55+ lbs)</option>
                     </select>
                 </div>
                 <div className="form-group">
                     <label for="activeness">How Active is your dog?</label>
-                    <select className="form-control" id="activeness">
+                    <select className="form-control" id="activeness" onChange={this.handleChange}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -92,7 +92,7 @@ class DogRegister extends Component {
                 </div>
                 <div className="form-group">
                     <label for="social_children">How social is your dog with children?</label>
-                    <select className="form-control" id="social_children_select">
+                    <select className="form-control" id="social_children_select" onChange={this.handleChange}>
                         <option value="1">One (not very social)</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -102,7 +102,7 @@ class DogRegister extends Component {
                 </div>
                 <div className="form-group">
                     <label for="social_people">How social is your dog with people?</label>
-                    <select className="form-control" id="social_people_select">
+                    <select className="form-control" id="social_people_select" onChange={this.handleChange}>
                         <option value="1">One (not very social)</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -121,7 +121,7 @@ class DogRegister extends Component {
                     </select>
                 </div>
                 <div className="form-group">
-                <label for="microchip">Does your dog have a microchip?</label>
+                    <label for="microchip">Does your dog have a microchip?</label>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" />
                         <label className="form-check-label" for="inlineRadioYes">Yes</label>

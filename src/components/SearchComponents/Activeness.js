@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+// import createHistory from "history/createBrowserHistory";
 
-import { Link } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import $ from 'jquery';
 import axios from 'axios';
 
-import ResultsCard from "../Results/ResultsCard";
-
+// const history = createHistory();
 
 
 
@@ -15,65 +15,70 @@ class Activeness extends Component {
         super(props);
     
         this.state = {
-          dataFromSearchComp: null
+          dataFromSearchComp: null,
+          redirectTo: null
         }
 
         this.activenessSearch = this.activenessSearch.bind(this);
     }
 
     activenessSearch(){
-        // var thisObj = this;
-        axios.get('http://localhost:3001/api/search', {
-            params:{
-                column: 'activeness',
-                columnVar: $('#inputGroupSelect04').val()
-            }
-        })
-        .then((res)=>{
-            console.log("res: ")
-            console.log(res);
-            // let searchResult = res.data;
+
+            axios.get('http://localhost:3001/api/search', {
+                    params:{
+                        column: 'activeness',
+                        columnVar: $('#inputGroupSelect04').val()
+                    }
+                })
+                .then((res)=>{  
+                    
+                    this.props.passDataToSearch(res.data);
+                    this.setState({
+                        dataFromSearchComp: res.data
+                    })
+                    this.setState({
+                        redirectTo: '/search/results'
+                    })
+                })
+                
+                .catch(function(err) {
+                    console.log(err);
+                })
+                // history.push('/search/results')
+
             
-            this.props.passDataToSearch(res.data);
-            this.setState({
-                dataFromSearchComp: res.data
-            }) 
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
     }
 
+    // componentDidMount() {
+    //     this.setState({
+    //         redirectTo: ''
+    //     })
+    // }
 
     render() {
-        return(
-            <div className="input-group">
-                <select className="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                    <option selected disabled="disabled">Choose Activeness Level...</option>
-                    <option value="1">One (Not active)</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                    <option value="5">Five (Very active)</option>
-                </select>
-                <div className="input-group-append">
-                    <button className="btn btn-outline-secondary" type="button" onClick={this.activenessSearch}>Search</button>
+        if (this.state.redirectTo) {
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+          } 
+          
+        else {
+            return(
+                <div className="input-group">
+                    <select className="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                        <option selected disabled="disabled">Choose Activeness Level...</option>
+                        <option value="1">One (Not active)</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
+                        <option value="5">Five (Very active)</option>
+                    </select>
+                    <div className="input-group-append">
+                        <Route render={({ history }) => (
+                            <button className="btn btn-outline-secondary" type="button" onClick={this.activenessSearch}>Search</button>
+                        )}/>
+                    </div>
                 </div>
-
-                {/* <div className="search-result-container">
-                {
-                    this.state.dataFromSearchComp ?
-                    this.state.dataFromSearchComp.map((dog) => (
-                        <ResultsCard key={dog.dog_id} dog_id={dog.dog_id} picture={dog.picture} name={dog.name} breed={dog.breed} size={dog.size} />
-                     )) : ""
-                }
-                </div> */}
-            </div>
-
-            
-
-            
-        )
+            )
+        }
     }
 }
 

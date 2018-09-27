@@ -14,9 +14,10 @@ module.exports = function(app){
         // console.log(req.params);
         //str = str.replace(/"/g,"")
         
-            let SQLquery = "select * from dogInfo where " + req.query.column + " = " + req.query.columnVar;    
+            let SQLquery = "select * from dogInfo where " + req.query.column + " = " + req.query.columnVar    
 
             connection.query(SQLquery, (err, data) => {
+                console.log(SQLquery)
                 if(err) {
                     console.log(err);
                     return false;
@@ -24,7 +25,7 @@ module.exports = function(app){
                 // resolve(data);
                 // res.json(data);  
                 
-            
+                console.log(data);
                 res.json(data)
         
         });

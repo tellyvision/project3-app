@@ -26,12 +26,12 @@ const Size = (props) => {
 
         <select className="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
             <option selected disabled="disabled">Choose the Size of the Dog...</option>
-            <option value="1">Small size (0-25 kg)</option>
-            <option value="2">Medium size(26-54 pbs)</option>
-            <option value="3">Large size (55+ pbs)</option>
+            <option value="1">Small size (0-25 lbs)</option>
+            <option value="2">Medium size(26-54 lbs)</option>
+            <option value="3">Large size (55+ lbs)</option>
         </select>
         <div className="input-group-append">
-            <button className="btn btn-outline-secondary" type="button" onClick={sizeSearch}>Button</button>
+            <button className="btn btn-outline-secondary" type="button" onClick={sizeSearch}>Search</button>
         </div>
 
         </div>

@@ -35,7 +35,7 @@ const SocialDog = (props) => {
             <option value="5">Five (very social)</option>
         </select>
         <div className="input-group-append">
-            <button className="btn btn-outline-secondary" type="button" onClick={socialDogSearch}>Button</button>
+            <button className="btn btn-outline-secondary" type="button" onClick={socialDogSearch}>Search</button>
         </div>
 
         </div>

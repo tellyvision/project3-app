@@ -47,12 +47,12 @@ class Search extends Component {
 
                     <div className="col-md-9">
                         {
-                            window.location.pathname === "/search/breed" && <Breed />
+                            window.location.pathname === "/search/breed" && <Breed passDataToSearch={this.childDataCallback}/>
                         ||  window.location.pathname === "/search/activeness" && <Activeness passDataToSearch={this.childDataCallback}/>
-                        ||  window.location.pathname === "/search/size" && <Size />
-                        ||  window.location.pathname === "/search/socialdog" && <SocialDog />
-                        ||  window.location.pathname === "/search/socialpeople" && <SocialPeople />
-                        || <SocialChildren />
+                        ||  window.location.pathname === "/search/size" && <Size passDataToSearch={this.childDataCallback} />
+                        ||  window.location.pathname === "/search/socialdog" && <SocialDog passDataToSearch={this.childDataCallback} />
+                        ||  window.location.pathname === "/search/socialpeople" && <SocialPeople passDataToSearch={this.childDataCallback} />
+                        ||  window.location.pathname === "/search/socialchildren" && <SocialChildren passDataToSearch={this.childDataCallback} />
                         }
                     </div>
 
