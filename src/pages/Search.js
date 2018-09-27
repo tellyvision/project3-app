@@ -13,13 +13,16 @@ class Search extends Component {
 
     constructor(props){
         super(props);
-    
+
+        this.childDataCallback = this.childDataCallback.bind(this);
+
         this.state = {
           dataFromSearchComp: null
         }
     }
 
     childDataCallback = (dataFromChild) =>{
+        // var thisObj = this;
         // pass data up to App (parent)
         this.props.passDataToApp(dataFromChild);
 
@@ -29,9 +32,9 @@ class Search extends Component {
         })
         console.log("new search state: ");
         console.log(this.state.dataFromSearchComp);
-        // if (this.state.dataFromSearchComp) {
-        //     return <Redirect to={"/search/results"} />
-        // }
+        if (this.state.dataFromSearchComp) {
+            return <Redirect to={"/search/results"} />
+        }
     }
 
     render() {
@@ -53,11 +56,11 @@ class Search extends Component {
                         }
                     </div>
 
-                    {/* <div>
+                    <div>
                         {window.location.pathname === "/search/results" && this.state.dataFromSearchComp.map((dog) => (
                            <ResultsCard dog_id={dog.dog_id} picture={dog.picture} name={dog.name} breed={dog.breed} size={dog.size} />
                         ))}
-                     </div> */}
+                     </div>
                 </div>
             </div>
         )

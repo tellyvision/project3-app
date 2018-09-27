@@ -22,20 +22,20 @@ class Activeness extends Component {
     }
 
     activenessSearch(){
-        var thisObj = this;
+        // var thisObj = this;
         axios.get('http://localhost:3001/api/search', {
             params:{
                 column: 'activeness',
                 columnVar: $('#inputGroupSelect04').val()
             }
         })
-        .then(function(res){
+        .then((res)=>{
             console.log("res: ")
             console.log(res);
             // let searchResult = res.data;
             
-            // this.props.passDataToSearch(res.data);
-            thisObj.setState({
+            this.props.passDataToSearch(res.data);
+            this.setState({
                 dataFromSearchComp: res.data
             }) 
         })
@@ -60,14 +60,14 @@ class Activeness extends Component {
                     <button className="btn btn-outline-secondary" type="button" onClick={this.activenessSearch}>Search</button>
                 </div>
 
-                <div className="search-result-container">
+                {/* <div className="search-result-container">
                 {
                     this.state.dataFromSearchComp ?
                     this.state.dataFromSearchComp.map((dog) => (
                         <ResultsCard key={dog.dog_id} dog_id={dog.dog_id} picture={dog.picture} name={dog.name} breed={dog.breed} size={dog.size} />
                      )) : ""
                 }
-                </div>
+                </div> */}
             </div>
 
             

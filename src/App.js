@@ -32,6 +32,7 @@ class App extends Component {
     this.getUser = this.getUser.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.updateUser = this.updateUser.bind(this) 
+    this.updateListFromSearch = this.updateListFromSearch.bind(this);
   }
 
   componentDidMount() {
@@ -63,13 +64,14 @@ class App extends Component {
     })
   }
 
-  // updateListFromSearch(dataFromSearch) {
-  //   this.setState({
-  //     List: dataFromSearch
-  //   });
-  //   console.log("updated this.state.list: ")
-  //   console.log(this.state.List);
-  // }
+  updateListFromSearch(dataFromSearch) {
+    // var this = this;
+    this.setState({
+      List: dataFromSearch
+    });
+    console.log("updated this.state.list: ")
+    console.log(this.state.List);
+  }
 
   render() {
     return (
@@ -78,8 +80,8 @@ class App extends Component {
           <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/search" render={(props) => <Search {...props} />  }/> 
-              {/* passDataToApp = {this.updateListFromSearch}    */}
+              <Route path="/search" render={(props) => <Search {...props} passDataToApp = {this.updateListFromSearch}/>  }/> 
+              
               <Route
                 path="/login"
                 render={() =>
