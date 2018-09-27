@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-//import Wrapper from "./components/Wrapper/Wrapper";
 //import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
 

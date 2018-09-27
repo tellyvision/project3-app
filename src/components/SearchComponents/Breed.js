@@ -21,7 +21,7 @@ class Breed extends Component {
         axios.get('http://localhost:3001/api/search', {
                 params:{
                     column: 'breed',
-                    columnVar: $('#inputGroupSelect04').val()
+                    columnVar: `'${$('#inputGroupSelect04').val()}'`
                 }
             })
             .then((res)=>{

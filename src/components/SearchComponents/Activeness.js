@@ -24,29 +24,27 @@ class Activeness extends Component {
 
     activenessSearch(){
 
-            axios.get('http://localhost:3001/api/search', {
-                    params:{
-                        column: 'activeness',
-                        columnVar: $('#inputGroupSelect04').val()
-                    }
-                })
-                .then((res)=>{  
-                    
-                    this.props.passDataToSearch(res.data);
-                    this.setState({
-                        dataFromSearchComp: res.data
-                    })
-                    this.setState({
-                        redirectTo: '/search/results'
-                    })
-                })
-                
-                .catch(function(err) {
-                    console.log(err);
-                })
-                // history.push('/search/results')
-
+        axios.get('http://localhost:3001/api/search', {
+            params:{
+                column: 'activeness',
+                columnVar: $('#inputGroupSelect04').val()
+            }
+        })
+        .then((res)=>{  
             
+            this.props.passDataToSearch(res.data);
+            this.setState({
+                dataFromSearchComp: res.data
+            })
+            this.setState({
+                redirectTo: '/search/results'
+            })
+        })
+            
+        .catch(function(err) {
+            console.log(err);
+        })
+            // history.push('/search/results')
     }
 
     // componentDidMount() {
