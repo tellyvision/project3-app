@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-//import Wrapper from "./components/Wrapper/Wrapper";
 //import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
 
@@ -69,7 +68,6 @@ class App extends Component {
   }
 
   updateListFromSearch(dataFromSearch) {
-    // var this = this;
     this.setState({
       List: dataFromSearch
     });
@@ -84,12 +82,8 @@ class App extends Component {
           <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
             <Switch>
               <Route exact path="/" component={Home} />
-<<<<<<< HEAD
               <Route path="/search" render={(props) => <Search {...props} passDataToApp = {this.updateListFromSearch}/>  }/> 
               
-=======
-              <Route path="/search" render={(props) => <Search {...props} list = {this.state.List}  />} />
->>>>>>> b560f9805f40c36beef0fbbe8bdb80b475a3060d
               <Route
                 path="/login"
                 render={() =>
@@ -104,7 +98,7 @@ class App extends Component {
               />
               <Route exact path="/profile" component={ProfilePerson} />
               <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
-              <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
+              <Route path="/dog-info/:dogid" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "Name" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
             </Switch>
           {/* <Footer /> */}  
         </div>

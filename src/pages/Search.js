@@ -47,18 +47,18 @@ class Search extends Component {
 
                     <div className="col-md-9">
                         {
-                            window.location.pathname === "/search/breed" && <Breed />
+                            window.location.pathname === "/search/breed" && <Breed passDataToSearch={this.childDataCallback}/>
                         ||  window.location.pathname === "/search/activeness" && <Activeness passDataToSearch={this.childDataCallback}/>
-                        ||  window.location.pathname === "/search/size" && <Size />
-                        ||  window.location.pathname === "/search/socialdog" && <SocialDog />
-                        ||  window.location.pathname === "/search/socialpeople" && <SocialPeople />
-                        || <SocialChildren />
+                        ||  window.location.pathname === "/search/size" && <Size passDataToSearch={this.childDataCallback} />
+                        ||  window.location.pathname === "/search/socialdog" && <SocialDog passDataToSearch={this.childDataCallback} />
+                        ||  window.location.pathname === "/search/socialpeople" && <SocialPeople passDataToSearch={this.childDataCallback} />
+                        ||  window.location.pathname === "/search/socialchildren" && <SocialChildren passDataToSearch={this.childDataCallback} />
                         }
                     </div>
 
                     <div>
                         {window.location.pathname === "/search/results" && this.state.dataFromSearchComp.map((dog) => (
-                           <ResultsCard key={dog.dog_id} dog_id={dog.dog_id} picture={dog.picture} name={dog.name} breed={dog.breed} size={dog.size} />
+                           <ResultsCard key={dog.dog_id} dog_id={dog.dog_id} picture={dog.dog_url} name={dog.name} breed={dog.breed} size={dog.size} />
                         ))}
                      </div>
                 </div>
