@@ -9,7 +9,7 @@ class SearchSelector extends Component {
       return (
         <div className="input-group">
           <select className="custom-select" onChange={this.onChange.bind(this)}>
-              <option selected>Search Criteria</option>
+              <option selected disabled="disabled">Search Criteria</option>
               <option className="dropdown-item" value="search/activeness">Activeness</option>
               <option className="dropdown-item" value="search/breed">Breed</option>
               <option className="dropdown-item" value="search/size">Size</option>

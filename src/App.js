@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import ProfilePerson from "./pages/ProfilePerson";
 //import Wrapper from "./components/Wrapper/Wrapper";
 //import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
@@ -12,6 +11,10 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Login from "./pages/Login";
 import UserRegister from "./pages/UserRegister";
+import ProfilePerson from "./pages/ProfilePerson";
+import DogRegister from "./pages/DogRegister";
+import DogWalkerBook from "./pages/ProfileDogWalker";
+// import DogOwnerBooking from "./pages/ProfileDogOwner";
 
 const history = createHistory();
 
@@ -25,7 +28,8 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: null,
-      List: "",
+      user_id: null,
+      List: [],
     }
   
    
@@ -70,7 +74,7 @@ class App extends Component {
           <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/search" component={Search}  />
+              <Route path="/search" render={(props) => <Search {...props} list = {this.state.List}  />} />
               <Route
                 path="/login"
                 render={() =>
@@ -84,6 +88,8 @@ class App extends Component {
                   <UserRegister/>}
               />
               <Route exact path="/profile" component={ProfilePerson} />
+              <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
+              <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
             </Switch>
           {/* <Footer /> */}  
         </div>
