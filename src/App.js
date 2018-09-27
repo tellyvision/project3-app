@@ -84,12 +84,8 @@ class App extends Component {
           <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
             <Switch>
               <Route exact path="/" component={Home} />
-<<<<<<< HEAD
               <Route path="/search" render={(props) => <Search {...props} passDataToApp = {this.updateListFromSearch}/>  }/> 
               
-=======
-              <Route path="/search" render={(props) => <Search {...props} list = {this.state.List}  />} />
->>>>>>> b560f9805f40c36beef0fbbe8bdb80b475a3060d
               <Route
                 path="/login"
                 render={() =>
