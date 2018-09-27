@@ -37,7 +37,10 @@ CREATE TABLE IF NOT EXISTS bookingInfo(
 );
 
 -- dummy data
-insert into userInfo (user_name, user_password, user_email, user_addr, user_postal) values ("Xinyi Zhu", "1111", "xinyizhu@gmail.com", "toronto", "m5v3y4"), ("Victor Ha", "2222", "victor@gmail.com", "somewhere", "m3f5o5"), ("Thy Vo", "3333", "thy@gmail.com", "earth", "m2e8t9");
+insert into userInfo (user_name, user_password, user_email, user_addr, user_postal) values 
+    ("Xinyi Zhu", "1111", "xinyizhu@gmail.com", "toronto", "m5v3y4"), 
+    ("Victor Ha", "2222", "victor@gmail.com", "somewhere", "m3f5o5"), 
+    ("Thy Vo", "3333", "thy@gmail.com", "earth", "m2e8t9");
 
 insert into dogInfo(owner_id, dog_name, dog_url, size, breed, activeness, microchip, social_children, social_ppl, social_dog) values (1, "kuro", "xxxx", 3, "retriever", 5, true, 3, 4, 3);
 insert into dogInfo(owner_id, dog_name, dog_url, size, breed, activeness, microchip, social_children, social_ppl, social_dog) values (1, "shiro", "xxxx", 1, "teddy", 4, false, 2, 3, 3);

@@ -63,14 +63,23 @@ class App extends Component {
     })
   }
 
+  // updateListFromSearch(dataFromSearch) {
+  //   this.setState({
+  //     List: dataFromSearch
+  //   });
+  //   console.log("updated this.state.list: ")
+  //   console.log(this.state.List);
+  // }
+
   render() {
     return (
-      <BrowserRouter history={history}>
+      <BrowserRouter history={history} >
         <div>
           <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/search" component={Search}  />
+              <Route path="/search" render={(props) => <Search {...props} />  }/> 
+              {/* passDataToApp = {this.updateListFromSearch}    */}
               <Route
                 path="/login"
                 render={() =>
