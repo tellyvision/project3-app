@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-//import Wrapper from "./components/Wrapper/Wrapper";
 //import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
 
@@ -97,7 +96,6 @@ class App extends Component {
   // }
 
   updateListFromSearch(dataFromSearch) {
-    // var this = this;
     this.setState({
       List: dataFromSearch
     });
@@ -132,6 +130,7 @@ class App extends Component {
               {/* onClick={this.getOwnerDogList} user_dog_list = {this.state.owner_dog_list} */}
               <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
               
+
             </Switch>
           {/* <Footer /> */}  
         </div>

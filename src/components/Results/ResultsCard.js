@@ -14,6 +14,7 @@ const ResultsCard = (props) => {
            </Link>
        </div>
    )
+
 };
 
 export default ResultsCard;

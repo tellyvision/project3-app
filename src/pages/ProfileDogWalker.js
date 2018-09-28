@@ -11,10 +11,16 @@ class DogWalkerBook extends Component {
     }
 
     
-    
-    bookDog() {
-
+    componentWillMount() {
+        //get request to bookinfo table to get available dates, store to state
+        //add modal info from state info
     }
+
+    bookDog() {
+        //modal of available dates.
+        //onclick, PUT request to db, add borrower id (from state as props) to entry.
+    }
+
 
 
 
