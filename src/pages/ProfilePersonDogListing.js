@@ -55,7 +55,20 @@ class ProfilePersonDogListing extends Component {
                             </div>
 
                             <div className="col-md-4">
-                                <Link to = "page that changes dog info">Change {dog.dog_id}'s Profile</Link>
+                            <Link to={{ pathname: `/dog-info/${dog.dog_id}`, 
+                                        state: { 
+                                            picture: dog.dog_url, 
+                                            dog_name: dog.dog_name, 
+                                            size: dog.dog_size, 
+                                            breed: dog.dog_breed, 
+                                            activeness: dog.activeness, 
+                                            microchip: dog.microchip, 
+                                            social_children: dog.socild_children, 
+                                            social_ppl: dog.social_ppl, 
+                                            social_dog: dog.social_dog, 
+                                            dog_id: dog.dog_id,
+                                        }
+                                    }}>`Change {dog.dog_name}'s Profile`</Link>
                             </div>
 
                             <div className="col-md-4">

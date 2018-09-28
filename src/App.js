@@ -12,7 +12,7 @@ import Login from "./pages/Login";
 import DashboardPage from './pages/DashboardPage.js';
 import LogoutFunction from './pages/LogoutFunction.js';
 import UserRegister from "./pages/UserRegister";
-import ProfilePerson from "./pages/ProfilePerson";
+// import ProfilePerson from "./pages/ProfilePerson"; //Not Completed
 import DogRegister from "./pages/DogRegister";
 import DogWalkerBook from "./pages/ProfileDogWalker";
 // import DogOwnerBooking from "./pages/ProfileDogOwner";
@@ -161,9 +161,10 @@ class App extends Component {
               <LoggedOutRoute path="/userregister" component={UserRegister}/>
               <Route path="/logout" component={LogoutFunction}/>
               {/* <Route exact path="/profile" component={ProfilePerson} /> */}
+              <Route path="/search" render={(props) => <Search {...props} passDataToApp = {this.updateListFromSearch}/>  }/> 
               <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
               <Route exact path="/your-dog-listing" render={(props) => <ProfilePersonDogListing {...props} user_id = {this.state.user_id} user_dog_list = {this.owner_dog_list}/>} />
-              <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
+              <Route path="/dog-info/:dog_id" render={(props) => <DogWalkerBook {...props} history={history} />} />
             </Switch>
           {/* <Footer /> */}  
         </div>
