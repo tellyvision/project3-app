@@ -64,11 +64,12 @@ class App extends Component {
     super(props);
     this.state = {
       authenticated: false,
-      username: null,
+      email: null,
       user_id: null,
       List: [],
     }
 
+    // this.getUser = this.getUser.bind(this);
     this.updateListFromSearch = this.updateListFromSearch.bind(this);
     this.getOwnerDogList = this.getOwnerDogList.bind(this);
 
@@ -76,7 +77,25 @@ class App extends Component {
 
   componentDidMount() {
     // check if user is logged in on refresh
-    this.toggleAuthenticateStatus()
+    this.toggleAuthenticateStatus();
+
+    //get user id
+    const xhr = new XMLHttpRequest();
+    xhr.open('get', '/api/dashboard');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // set the authorization HTTP header
+    xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        console.log("this is user information:")
+        console.log(xhr.response.user)
+        this.setState({
+          user_id: xhr.response.user._id
+        });
+      }
+    });
+    xhr.send();
   }
 
   toggleAuthenticateStatus() {
@@ -84,8 +103,26 @@ class App extends Component {
     this.setState({ authenticated: Auth.isUserAuthenticated() })
   }
 
+  getUser(){
+    const xhr = new XMLHttpRequest();
+    xhr.open('get', '/api/dashboard');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // set the authorization HTTP header
+    xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+        console.log("this is user email:")
+        console.log(xhr.response.user.email)
+        this.setState({
+          email: xhr.response.user.email,
+          user_id: xhr.response.user._id
+        }); 
+    });
+    xhr.send();
+  }
+
   getOwnerDogList() {
-    if(this.state.loggedIn === true && this.state.username !== "") {
+    if(this.state.authenticated === true && this.state.email !== "") {
       axios.get('http://localhost:3001/api/ownerDogSearch', {
             params:{
                 userID: this.props.user_id
@@ -116,19 +153,17 @@ class App extends Component {
     return (
       <BrowserRouter history={history} >
         <div>
-          <Route path="/" render={(props) => <Navbar {...props} authenticated={this.state.authenticated} name={this.state.username}/>} />
+          <Route path="/" render={(props) => <Navbar {...props} authenticated={this.state.authenticated} name={this.state.email}/>} />
             <Switch>
               <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
               <PrivateRoute path="/dashboard" component={DashboardPage}/>
               <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
               <LoggedOutRoute path="/userregister" component={UserRegister}/>
               <Route path="/logout" component={LogoutFunction}/>
-              <Route exact path="/profile" component={ProfilePerson} />
+              {/* <Route exact path="/profile" component={ProfilePerson} /> */}
               <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
               <Route exact path="/your-dog-listing" render={(props) => <ProfilePersonDogListing {...props} user_id = {this.state.user_id} user_dog_list = {this.owner_dog_list}/>} />
               <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
-              
-
             </Switch>
           {/* <Footer /> */}  
         </div>

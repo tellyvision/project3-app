@@ -1,6 +1,6 @@
 import React from 'react';
 import Auth from '../modules/Auth';
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../components/User/Dashboard';
 
 
 class DashboardPage extends React.Component {
@@ -31,7 +31,6 @@ class DashboardPage extends React.Component {
         console.log("this is user information:")
         console.log(xhr.response.user)
         this.setState({
-          secretData: xhr.response.message,
           user: xhr.response.user
         });
       }
