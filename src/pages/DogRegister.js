@@ -44,11 +44,13 @@ class DogRegister extends Component {
         return(
             <form>
                 <div className="form-group">
+                    <label for="name">What is your dog's name?</label>
                     <input className="form-control" type="text" placeholder="Dog's Name" id="dog_name_input" name="dog_name" onChange={this.handleChange}></input>
                 </div>
                 <div className="form-group">
-                    <label for="breed">What is your dog's breed</label>
+                    <label for="breed">What is your dog's breed?</label>
                     <select className="form-control" id="breed_select" name="breed" onChange={this.handleChange}>
+                        <option selected disabled="disabled">Choose Breed...</option>
                         <option value="Appenzeller Sennenhunde">Appenzeller Sennenhunde</option>
                         <option value="Beagle">Beagle</option>
                         <option value="Bulldog">Bulldog</option>
@@ -77,6 +79,7 @@ class DogRegister extends Component {
                 <div className="form-group">
                     <label for="size">How large is your dog?</label>
                     <select className="form-control" id="size" name="size" onChange={this.handleChange}>
+                    <option selected disabled="disabled">Choose Size...</option>
                         <option value="1">Small size (0-25 lbs)</option>
                         <option value="2">Medium size(26-54 lbs)</option>
                         <option value="3">Large size (55+ lbs)</option>
@@ -85,16 +88,18 @@ class DogRegister extends Component {
                 <div className="form-group">
                     <label for="activeness">How Active is your dog?</label>
                     <select className="form-control" id="activeness" name="activeness" onChange={this.handleChange}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                    <option selected disabled="disabled">Choose How Active Your Dog Is...</option>
+                        <option value="1">One (Not Active)</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
+                        <option value="5">Five (Very Active)</option>
                     </select>
                 </div>
                 <div className="form-group">
                     <label for="social_children">How social is your dog with children?</label>
                     <select className="form-control" id="social_children_select" name="social_children" onChange={this.handleChange}>
+                        <option selected disabled="disabled">Choose How Your Dog Is With Children...</option>
                         <option value="1">One (not very social)</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -105,6 +110,7 @@ class DogRegister extends Component {
                 <div className="form-group">
                     <label for="social_people">How social is your dog with people?</label>
                     <select className="form-control" id="social_people_select" name="social_ppl" onChange={this.handleChange}>
+                        <option selected disabled="disabled">Choose How Your Dog Is With People...</option>
                         <option value="1">One (not very social)</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -115,6 +121,7 @@ class DogRegister extends Component {
                 <div className="form-group">
                     <label for="social_dog">How social is your dog with other dogs?</label>
                     <select className="form-control" id="social_dog_select" name="social_dog" onChange={this.handleChange}>
+                        <option selected disabled="disabled">Choose How Your Dog Is With Other Dogs...</option>
                         <option value="1">One (not very social)</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -135,13 +142,12 @@ class DogRegister extends Component {
                 </div>
 
                 <div className="form-group">
+                    <label for="picture">Show us a picture of your dog</label>
                     <input className="form-control" type="text" placeholder="Dog's Picture URL" id="dog_picture_input" name="dog_url" onChange={this.handleChange}></input>
                 </div>
 
                 <button type="button" className="btn btn-secondary" onClick={this.registerDog}>Register</button>
                 <button type="reset" className="btn btn-danger">Cancel</button>
-
-            
             </form>
         )
     }

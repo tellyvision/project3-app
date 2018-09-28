@@ -1,13 +1,18 @@
 //allows user to book dog to walk
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { Redirect } from "react-router-dom";
+
+import DogBookingModal from "../components/Modal/DogBookingModal";
 
 class DogWalkerBook extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showModal: false,
             redirectTo: null
         }	
+        this.bookDogModal = this.bookDogModal.bind(this);
     }
 
     
@@ -16,7 +21,8 @@ class DogWalkerBook extends Component {
         //add modal info from state info
     }
 
-    bookDog() {
+    bookDogModal() {
+        this.setState({ showModal: true });
         //modal of available dates.
         //onclick, PUT request to db, add borrower id (from state as props) to entry.
     }
@@ -38,7 +44,7 @@ class DogWalkerBook extends Component {
                     <p>Sociability with Other Dogs: {this.props.social_dog}</p>
                     <button
                         className="btn btn-secondary col-1 col-mr-auto"
-                        onClick={this.bookDog}
+                        onClick={this.bookDogModal}
                         type="button">Book
                     </button>
                     <button
@@ -46,10 +52,20 @@ class DogWalkerBook extends Component {
                         onClick={this.handleSubmit}
                         type="button">Back
                     </button>
+
+                    <DogBookingModal show={this.state.showModal} handleClose={this.hideModal}>
+                        <p>Modal</p>
+                        <p>Data</p>
+                    </DogBookingModal>
+
                 </div>
             </div>
         )
     }
 }
+
+// const container = document.createElement("div");
+// document.body.appendChild(container);
+// ReactDOM.render(<DogWalkerBook />, container);
 
 export default DogWalkerBook;
