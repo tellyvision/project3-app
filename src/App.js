@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 //import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
@@ -9,6 +9,8 @@ import createHistory from "history/createBrowserHistory";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Login from "./pages/Login";
+import DashboardPage from './pages/DashboardPage.js';
+import LogoutFunction from './pages/LogoutFunction.js';
 import UserRegister from "./pages/UserRegister";
 import ProfilePerson from "./pages/ProfilePerson";
 import DogRegister from "./pages/DogRegister";
@@ -17,7 +19,42 @@ import DogWalkerBook from "./pages/ProfileDogWalker";
 import ProfilePersonDogListing from "./pages/ProfilePersonDogListing";
 // import ProfileDogOwner from "./pages/ProfileDogOwner";
 
+//Passport Related Thing
+import Auth from './modules/Auth';
+
 const history = createHistory();
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    Auth.isUserAuthenticated() ? (
+      <Component {...props} {...rest} />
+    ) : (
+      <Redirect to={{
+        pathname: '/',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
+
+const LoggedOutRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    Auth.isUserAuthenticated() ? (
+      <Redirect to={{
+        pathname: '/',
+        state: { from: props.location }
+      }}/>
+    ) : (
+      <Component {...props} {...rest} />
+    )
+  )}/>
+)
+
+const PropsRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    <Component {...props} {...rest} />
+  )}/>
+)
 
 //import logo from './logo.svg';
 //import './App.css';
@@ -25,53 +62,67 @@ const history = createHistory();
 class App extends Component {
   constructor(props){
     super(props);
-
     this.state = {
-      loggedIn: false,
-      username: null,
+      authenticated: false,
+      email: null,
       user_id: null,
       List: [],
       // owner_dog_list: []
     }
-  
-   
-    this.getUser = this.getUser.bind(this)
-    this.componentDidMount = this.componentDidMount.bind(this)
-    this.updateUser = this.updateUser.bind(this) 
+
+    // this.getUser = this.getUser.bind(this);
     this.updateListFromSearch = this.updateListFromSearch.bind(this);
     // this.getOwnerDogList = this.getOwnerDogList.bind(this);
 
   }
 
   componentDidMount() {
-    this.getUser()
-  }
+    // check if user is logged in on refresh
+    this.toggleAuthenticateStatus();
 
-  updateUser (userObject) {
-    this.setState(userObject)
-  }
-
-  getUser() {
-    axios.get('/user/').then(response => {
-      console.log('Get user response: ')
-      console.log(response.data)
-      if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ')
-
+    //get user id
+    const xhr = new XMLHttpRequest();
+    xhr.open('get', '/api/dashboard');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // set the authorization HTTP header
+    xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        console.log("this is user information:")
+        console.log(xhr.response.user)
         this.setState({
-          loggedIn: true,
-          username: response.data.user.username
-        })
-      } else {
-        console.log('Get user: no user');
-        this.setState({
-          loggedIn: false,
-          username: null
-        })
+          user_id: xhr.response.user._id
+        });
       }
-    })
+    });
+    xhr.send();
   }
 
+  toggleAuthenticateStatus() {
+    // check authenticated status and toggle state based on that
+    this.setState({ authenticated: Auth.isUserAuthenticated() })
+  }
+
+  getUser(){
+    const xhr = new XMLHttpRequest();
+    xhr.open('get', '/api/dashboard');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // set the authorization HTTP header
+    xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+        console.log("this is user email:")
+        console.log(xhr.response.user.email)
+        this.setState({
+          email: xhr.response.user.email,
+          user_id: xhr.response.user._id
+        }); 
+    });
+    xhr.send();
+  }
+
+<<<<<<< HEAD
   // getOwnerDogList() {
   //   if(this.state.loggedIn === true && this.state.username !== "") {
   //     axios.get('http://localhost:3001/api/ownerDogSearch', {
@@ -94,6 +145,27 @@ class App extends Component {
   //       });
   //   }
   // }
+=======
+  getOwnerDogList() {
+    if(this.state.authenticated === true && this.state.email !== "") {
+      axios.get('http://localhost:3001/api/ownerDogSearch', {
+            params:{
+                userID: this.props.user_id
+            }
+        })
+        .then((res) => {
+            console.log("res owner's dogs: ")
+            console.log(res);
+            let owner_dog_list = res.data;
+            console.log("new owner's doglist state: ");
+            console.log(this.state.ownerDogList);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+  }
+>>>>>>> 5b8b19ac3c5dce659a3bc2618c20b6118e604fec
 
   updateListFromSearch(dataFromSearch) {
     this.setState({
@@ -107,34 +179,23 @@ class App extends Component {
     return (
       <BrowserRouter history={history} >
         <div>
-          <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
+          <Route path="/" render={(props) => <Navbar {...props} authenticated={this.state.authenticated} name={this.state.email}/>} />
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/search" render={(props) => <Search {...props} passDataToApp = {this.updateListFromSearch}/>  }/> 
-              
-              <Route
-                path="/login"
-                render={() =>
-                  <Login
-                    updateUser={this.updateUser}
-                  />}
-              />
-              <Route
-                path="/userRegister"
-                render={() =>
-                  <UserRegister/>}
-              />
-              <Route exact path="/profile" component={ProfilePerson} />
+              <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+              <PrivateRoute path="/dashboard" component={DashboardPage}/>
+              <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+              <LoggedOutRoute path="/userregister" component={UserRegister}/>
+              <Route path="/logout" component={LogoutFunction}/>
+              {/* <Route exact path="/profile" component={ProfilePerson} /> */}
               <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
               <Route exact path="/your-dog-listing" render={(props) => <ProfilePersonDogListing {...props} user_id = {this.state.user_id} />} /> 
               {/* onClick={this.getOwnerDogList} user_dog_list = {this.state.owner_dog_list} */}
               <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
-              
-
             </Switch>
           {/* <Footer /> */}  
         </div>
       </BrowserRouter>
+
     );
   }
 }

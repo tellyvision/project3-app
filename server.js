@@ -5,43 +5,37 @@ var cors = require('cors')
 var path = require('path');
 var port = process.env.PORT || 3001;
 
-//MONGO AND PASSPORT
-const morgan = require('morgan')
-const session = require('express-session')
-const mongoConnection = require('./userServer/database') 
-const MongoStore = require('connect-mongo')(session)
-const passport = require('./userServer/passport');
+///////////MONGO AND PASSPORT
+const passport = require('passport');
+const config = require('./config');
 const app = express()
 
-// Route requires
-const user = require('./userServer/routes/user')
+require('./userServer/models').connect(config.dbUri);
 
-// MIDDLEWARE
-app.use(morgan('dev'))
-app.use(
-	body_parser.urlencoded({
-		extended: false
-	})
-)
-app.use(body_parser.json())
+// tell the app to look for static files in these directories
+app.use(express.static('./server/static/'));
+app.use(express.static('./dist/'));
+// tell the app to parse HTTP body messages
+app.use(body_parser.urlencoded({ extended: false }));
+// pass the passport middleware
+app.use(passport.initialize());
 
-// Sessions
-app.use(
-	session({
-		secret: 'random-hash-string',
-		store: new MongoStore({ mongooseConnection: mongoConnection }),
-		resave: false, //required
-		saveUninitialized: false //required
-	})
-)
+// load passport strategies
+const localSignupStrategy = require('./userServer/passport/local-signup');
+const localLoginStrategy = require('./userServer/passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
 
-// Passport
-app.use(passport.initialize())
-app.use(passport.session()) // calls the deserializeUser
+// pass the authenticaion checker middleware
+const authCheckMiddleware = require('./userServer/middleware/auth-check');
+app.use('/api', authCheckMiddleware);
 
-// Routes
-app.use('/user', user)
-
+// routes
+const authRoutes = require('./userServer/routes/auth');
+const apiRoutes = require('./userServer/routes/api');
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
+//////////////MONGO AND PASSPORT END
 
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({
