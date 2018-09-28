@@ -1,28 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import axios from 'axios'
 
 class Navbar extends Component {
 	constructor(props) {
 		super(props);
-		this.logout = this.logout.bind(this)	
 	}
 
-logout(event) {
-	event.preventDefault()
-	console.log('logging out')
-	axios.post('/user/logout').then(response => {
-		console.log(response.data)
-		if (response.status === 200) {
-			this.props.updateUser({
-				loggedIn: false,
-				username: null
-			})
-		}
-	}).catch(error => {
-		console.log('Logout error')
-	})
-}
 
 render() {
 	const loggedIn = this.props.loggedIn;
@@ -52,9 +35,9 @@ render() {
 				: "nav-item nav-link"}><Link to ="/login">Log In</Link>
 				</li>
 				
-				<li className={window.location.pathname === "/userRegister"
+				<li className={window.location.pathname === "/signup"
 				? "nav-item nav-link active"
-				: "nav-item nav-link"}><Link to ="/userRegister">Register</Link>
+				: "nav-item nav-link"}><Link to ="/signup">Register</Link>
 				</li>
                 {/* TODO: Conditional rendering if logged in, show profile instead of login */}
                 </ul>

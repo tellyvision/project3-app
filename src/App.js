@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 //import Wrapper from "./components/Wrapper/Wrapper";
 //import Footer from "./components/Footer";
@@ -9,10 +8,50 @@ import createHistory from "history/createBrowserHistory";
 //Pages
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import Login from "./pages/Login";
-import UserRegister from "./pages/UserRegister";
+
+/////////PASSPORT
+import LoginPage from './pages/LoginPage.js';
+import LogoutFunction from './pages/LogoutFunction.js';
+import SignUpPage from './pages/SignUpPage.js';
+import DashboardPage from './pages/DashboardPage.js';
+import Auth from './modules/Auth';
+
+//////////PASSPORT
 
 const history = createHistory();
+
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    Auth.isUserAuthenticated() ? (
+      <Component {...props} {...rest} />
+    ) : (
+      <Redirect to={{
+        pathname: '/',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
+
+const LoggedOutRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    Auth.isUserAuthenticated() ? (
+      <Redirect to={{
+        pathname: '/',
+        state: { from: props.location }
+      }}/>
+    ) : (
+      <Component {...props} {...rest} />
+    )
+  )}/>
+)
+
+const PropsRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    <Component {...props} {...rest} />
+  )}/>
+)
 
 //import logo from './logo.svg';
 //import './App.css';
@@ -20,72 +59,37 @@ const history = createHistory();
 class App extends Component {
   constructor(props){
     super(props);
-
     this.state = {
-      loggedIn: false,
-      email: null,
-      List: "",
+      authenticated: false
     }
-  
-   
-    this.getUser = this.getUser.bind(this)
-    this.componentDidMount = this.componentDidMount.bind(this)
-    this.updateUser = this.updateUser.bind(this) 
-  }
+  };
 
   componentDidMount() {
-    this.getUser()
+    // check if user is logged in on refresh
+    this.toggleAuthenticateStatus()
   }
 
-  updateUser (userObject) {
-    this.setState(userObject)
-  }
-
-  getUser() {
-    axios.get('/user/').then(response => {
-      console.log('Get user response: ')
-      console.log(response.data)
-      if (response.data.user) {
-        console.log('Get User: There is a user saved in the server session: ')
-
-        this.setState({
-          loggedIn: true,
-          email: response.data.user.email
-        })
-      } else {
-        console.log('Get user: no user');
-        this.setState({
-          loggedIn: false,
-          email: null
-        })
-      }
-    })
+  toggleAuthenticateStatus() {
+    // check authenticated status and toggle state based on that
+    this.setState({ authenticated: Auth.isUserAuthenticated() })
   }
 
   render() {
     return (
-      <BrowserRouter history={history}>
+      <Router history={history}>
         <div>
           <Route component={Navbar} />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/search" component={Search}  />
-              <Route
-                path="/login"
-                render={() =>
-                  <Login
-                    updateUser={this.updateUser}
-                  />}
-              />
-              <Route
-                path="/userRegister"
-                render={() =>
-                  <UserRegister/>}
-              />
-            </Switch>
+            
+            <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+            <PrivateRoute path="/dashboard" component={DashboardPage}/>
+            <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+            <LoggedOutRoute path="/signup" component={SignUpPage}/>
+            <Route path="/logout" component={LogoutFunction}/>
+            
           {/* <Footer /> */}  
         </div>
-      </BrowserRouter>
+      </Router>
+
     );
   }
 }
