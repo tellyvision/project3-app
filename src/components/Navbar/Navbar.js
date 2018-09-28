@@ -14,7 +14,7 @@ const unloggedinArray = [{ name: "Home", url: "/" },
 const loggedinArray = [{ name: "Home", url: "/" },
  { name: "Search", url: "/Search" },
  { name: "Profile", url: "/Profile" },
- { name: "Your Dogs", url: "/YourDogs" },  //need to change this to below
+ { name: "Your Dogs", url: "/your-dog-listing" },  //need to change this to below
  { name: "Log Out", url: "/logout" }];
 
 class Navbar extends Component {
@@ -42,7 +42,6 @@ class Navbar extends Component {
                                         </li>
                                     ))}
                                 </ul>
-                            
                             :   
                                 <ul className="navbar-nav mr-auto"> 
                                 {loggedinArray.map(x => (

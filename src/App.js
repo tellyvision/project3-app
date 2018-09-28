@@ -16,6 +16,8 @@ import ProfilePerson from "./pages/ProfilePerson";
 import DogRegister from "./pages/DogRegister";
 import DogWalkerBook from "./pages/ProfileDogWalker";
 // import DogOwnerBooking from "./pages/ProfileDogOwner";
+import ProfilePersonDogListing from "./pages/ProfilePersonDogListing";
+// import ProfileDogOwner from "./pages/ProfileDogOwner";
 
 //Passport Related Thing
 import Auth from './modules/Auth';
@@ -68,6 +70,8 @@ class App extends Component {
     }
 
     this.updateListFromSearch = this.updateListFromSearch.bind(this);
+    this.getOwnerDogList = this.getOwnerDogList.bind(this);
+
   }
 
   componentDidMount() {
@@ -78,6 +82,26 @@ class App extends Component {
   toggleAuthenticateStatus() {
     // check authenticated status and toggle state based on that
     this.setState({ authenticated: Auth.isUserAuthenticated() })
+  }
+
+  getOwnerDogList() {
+    if(this.state.loggedIn === true && this.state.username !== "") {
+      axios.get('http://localhost:3001/api/ownerDogSearch', {
+            params:{
+                userID: this.props.user_id
+            }
+        })
+        .then((res) => {
+            console.log("res owner's dogs: ")
+            console.log(res);
+            let owner_dog_list = res.data;
+            console.log("new owner's doglist state: ");
+            console.log(this.state.ownerDogList);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
   }
 
   updateListFromSearch(dataFromSearch) {
@@ -101,7 +125,10 @@ class App extends Component {
               <Route path="/logout" component={LogoutFunction}/>
               <Route exact path="/profile" component={ProfilePerson} />
               <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
-              <Route path="/dog-info/:dogid" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "Name" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
+              <Route exact path="/your-dog-listing" render={(props) => <ProfilePersonDogListing {...props} user_id = {this.state.user_id} user_dog_list = {this.owner_dog_list}/>} />
+              <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
+              
+
             </Switch>
           {/* <Footer /> */}  
         </div>
@@ -112,20 +139,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-              // <Route exact path="/" component={Home} />
-              // <Route path="/search" render={(props) => <Search {...props} passDataToApp = {this.updateListFromSearch}/>  }/> 
-              
-              // <Route
-              //   path="/login"
-              //   render={() =>
-              //     <Login
-              //       updateUser={this.updateUser}
-              //     />}
-              // />
-              // <Route
-              //   path="/userRegister"
-              //   render={() =>
-              //     <UserRegister/>}
-              // />

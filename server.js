@@ -50,11 +50,6 @@ app.use(cors());
 // override POST methods in forms that has ?_method=DELETE/PUT
 // app.use(methodOverride('_method'));
 
-// var exphbs = require('express-handlebars');
-// app.engine('handlebars', exphbs({
-//   defaultLayout: 'main'
-// }));
-// app.set('view engine', 'handlebars');
 
 require('./controllers/apiRoutes.js')(app);
 
