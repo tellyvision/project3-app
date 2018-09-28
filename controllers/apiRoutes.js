@@ -8,15 +8,29 @@ module.exports = function(app){
     ///////////////////
 
     // get request for search bar
-    app.get('/api/search', function(req, res) {
-        let query = `select * from dogInfo where ${req.body.category} = ${req.body.searchKey}`;    
-        connection.query(query, (err, data) => {
-            if(err) {
-                console.log(err);
-                return false;
-            }
-            res.json(data);  
-        })
+    app.get('/api/search*', function(req, res) {
+        console.log(req.query.column);
+        console.log(req.query.columnVar);
+        // console.log(req.params);
+        //str = str.replace(/"/g,"")
+        
+            let SQLquery = "select * from dogInfo where " + req.query.column + " = " + req.query.columnVar    
+
+            connection.query(SQLquery, (err, data) => {
+                console.log(SQLquery)
+                if(err) {
+                    console.log(err);
+                    return false;
+                }
+                // resolve(data);
+                // res.json(data);  
+                
+                console.log(data);
+                res.json(data)
+        
+        });
+        // let query = `select * from dogInfo where ${connection.escape(req.query.column)} = ${connection.escape(req.query.columnVal)}`;    
+        
     });
 
     // get request for get dog info
@@ -41,6 +55,7 @@ module.exports = function(app){
             }
             return true;
         })
+        res.json('test')
     })
 
     ///////////////////
@@ -53,7 +68,7 @@ module.exports = function(app){
 
     // create new dog profile
     app.post('/api/dog-profile', function(req, res) {
-        var query = `insert into dogInfo (owner_id, dog_name, size, breed, activeness, microchip, social_children, social_ppl, social_dog) values (${req.body})`;
+        var query = `insert into dogInfo (owner_id, dog_name, size, breed, activeness, microchip, social_children, social_ppl, social_dog, dog_url) values (${req.body.owner_id}, '${req.body.dog_name}', ${req.body.size}, '${req.body.breed}', ${req.body.activeness}, ${req.body.microchip}, ${req.body.social_children}, ${req.body.social_ppl}, ${req.body.social_dog}, '${req.body.dog_url}')`;
         // see if data can be passed as string
         connection.query(query, (err, data) => {
             if(err) {
@@ -67,7 +82,8 @@ module.exports = function(app){
     // create new booking/meetup - for dog owner
     // owner submit new booking
     app.post('/api/meet-up', function(req, res) {
-        var query = `insert into bookingInfo (booking_dog_id, lender_id, booking_date) values (${req.body})`;
+        let query = `insert into bookingInfo (booking_dog_id, lender_id, booking_date) values (${req.body})`;
+        console.log(query);
         connection.query(query, (err, data) => {
             if(err) {
                 console.log(err);

@@ -16,3 +16,17 @@ delete:
 remove dog/killed dog
 remove rental time of dog
 user deletion (unless handled by passport)
+
+Res Object
+data: Array(1)
+0:
+activeness: 5
+breed: “teddy”
+dog_id: 2
+dog_name: “shiro”
+microchip: 1
+owner_id: 1
+size: “10.00”
+social_children: 0
+social_dog: 3
+social_ppl: 3

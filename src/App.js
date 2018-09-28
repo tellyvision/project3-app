@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import { BrowserRouter, Router, Route, Switch, Link, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-//import Wrapper from "./components/Wrapper/Wrapper";
 //import Footer from "./components/Footer";
 import createHistory from "history/createBrowserHistory";
 
 //Pages
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-
-/////////PASSPORT
-import LoginPage from './pages/LoginPage.js';
+import Login from "./pages/Login";
+import Dashboard from './pages/Dashboard.js';
 import LogoutFunction from './pages/LogoutFunction.js';
-import SignUpPage from './pages/SignUpPage.js';
-import DashboardPage from './pages/DashboardPage.js';
+import UserRegister from "./pages/UserRegister";
+import ProfilePerson from "./pages/ProfilePerson";
+import DogRegister from "./pages/DogRegister";
+import DogWalkerBook from "./pages/ProfileDogWalker";
+// import DogOwnerBooking from "./pages/ProfileDogOwner";
+
+//Passport Related Thing
 import Auth from './modules/Auth';
 
-//////////PASSPORT
-
 const history = createHistory();
-
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
@@ -60,9 +61,17 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      authenticated: false
+      authenticated: false,
+      username: null,
+      user_id: null,
+      List: [],
     }
-  };
+   
+    this.getUser = this.getUser.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.updateUser = this.updateUser.bind(this) 
+    this.updateListFromSearch = this.updateListFromSearch.bind(this);
+  }
 
   componentDidMount() {
     // check if user is logged in on refresh
@@ -74,24 +83,52 @@ class App extends Component {
     this.setState({ authenticated: Auth.isUserAuthenticated() })
   }
 
+  updateListFromSearch(dataFromSearch) {
+    this.setState({
+      List: dataFromSearch
+    });
+    console.log("updated this.state.list: ")
+    console.log(this.state.List);
+  }
+
   render() {
     return (
-      <Router history={history}>
+      <BrowserRouter history={history} >
         <div>
-          <Route component={Navbar} />
-            
-            <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
-            <PrivateRoute path="/dashboard" component={DashboardPage}/>
-            <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
-            <LoggedOutRoute path="/signup" component={SignUpPage}/>
-            <Route path="/logout" component={LogoutFunction}/>
-            
+          <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
+            <Switch>
+              <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+              <PrivateRoute path="/dashboard" component={Dashboard}/>
+              <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+              <LoggedOutRoute path="/userregister" component={UserRegister}/>
+              <Route path="/logout" component={LogoutFunction}/>
+              <Route exact path="/profile" component={ProfilePerson} />
+              <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
+              <Route path="/dog-info/:dogid" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "Name" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
+            </Switch>
           {/* <Footer /> */}  
         </div>
-      </Router>
+      </BrowserRouter>
 
     );
   }
 }
 
 export default App;
+
+
+              // <Route exact path="/" component={Home} />
+              // <Route path="/search" render={(props) => <Search {...props} passDataToApp = {this.updateListFromSearch}/>  }/> 
+              
+              // <Route
+              //   path="/login"
+              //   render={() =>
+              //     <Login
+              //       updateUser={this.updateUser}
+              //     />}
+              // />
+              // <Route
+              //   path="/userRegister"
+              //   render={() =>
+              //     <UserRegister/>}
+              // />

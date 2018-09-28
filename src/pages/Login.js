@@ -121,4 +121,4 @@ LoginPage.contextTypes = {
   router: PropTypes.object.isRequired
 };
 
-export default LoginPage;
+export default Login;
