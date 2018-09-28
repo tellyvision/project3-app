@@ -38,6 +38,7 @@ module.exports = function(app){
 
     // get request for getting all dogs info owned a specific user
     app.get('/api/ownerDogSearch', function(req, res) {
+        console.log(req.query.user_id);
         let query = "select * from dogInfo where owner_id = " + req.query.userID;
         connection.query(query, (err, data) => {
             if(err) {
