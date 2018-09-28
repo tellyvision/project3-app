@@ -9,7 +9,7 @@ import createHistory from "history/createBrowserHistory";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Login from "./pages/Login";
-import Dashboard from './pages/Dashboard.js';
+import DashboardPage from './pages/DashboardPage.js';
 import LogoutFunction from './pages/LogoutFunction.js';
 import UserRegister from "./pages/UserRegister";
 import ProfilePerson from "./pages/ProfilePerson";
@@ -66,10 +66,7 @@ class App extends Component {
       user_id: null,
       List: [],
     }
-   
-    this.getUser = this.getUser.bind(this)
-    this.componentDidMount = this.componentDidMount.bind(this)
-    this.updateUser = this.updateUser.bind(this) 
+
     this.updateListFromSearch = this.updateListFromSearch.bind(this);
   }
 
@@ -95,10 +92,10 @@ class App extends Component {
     return (
       <BrowserRouter history={history} >
         <div>
-          <Route path="/" render={(props) => <Navbar {...props} loggedIn = {this.state.loggedIn} name={this.state.username} />} />
+          <Route path="/" render={(props) => <Navbar {...props} authenticated={this.state.authenticated} name={this.state.username}/>} />
             <Switch>
               <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
-              <PrivateRoute path="/dashboard" component={Dashboard}/>
+              <PrivateRoute path="/dashboard" component={DashboardPage}/>
               <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
               <LoggedOutRoute path="/userregister" component={UserRegister}/>
               <Route path="/logout" component={LogoutFunction}/>

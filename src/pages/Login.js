@@ -4,7 +4,7 @@ import Auth from '../modules/Auth';
 import LoginForm from '../components/LoginForm.js';
 
 
-class LoginPage extends React.Component {
+class Login extends React.Component {
 
   /**
    * Class constructor.
@@ -88,8 +88,9 @@ class LoginPage extends React.Component {
   /**
    * Change the user object.
    *
-   * @param {object} event - the JavaScript event object
+   * @param {object} event
    */
+  
   changeUser(event) {
     const field = event.target.name;
     const user = this.state.user;
@@ -100,9 +101,6 @@ class LoginPage extends React.Component {
     });
   }
 
-  /**
-   * Render the component.
-   */
   render() {
     return (
       <LoginForm
@@ -117,7 +115,7 @@ class LoginPage extends React.Component {
 
 }
 
-LoginPage.contextTypes = {
+Login.contextTypes = {
   router: PropTypes.object.isRequired
 };
 

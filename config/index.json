@@ -1,4 +1,3 @@
 {
-  "dbUri": "mongodb://localhost/react_passport",
-  "jwtSecret": "Logged In!!"
+  "dbUri": "mongodb://localhost/DogShare_Proj3"
 }

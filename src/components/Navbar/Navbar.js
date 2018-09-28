@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
 const navStyle= {
-    "background-color": "#e3f2fd",
-    "margin-bottom": "15px"
+    "backgroundColor": "#e3f2fd",
+    "marginBottom": "15px"
 }
 
 const unloggedinArray = [{ name: "Home", url: "/" },
@@ -14,7 +14,8 @@ const unloggedinArray = [{ name: "Home", url: "/" },
 const loggedinArray = [{ name: "Home", url: "/" },
  { name: "Search", url: "/Search" },
  { name: "Profile", url: "/Profile" },
- { name: "Your Dogs", url: "/YourDogs" }]; //need to change this to below
+ { name: "Your Dogs", url: "/YourDogs" },  //need to change this to below
+ { name: "Log Out", url: "/logout" }];
 
 class Navbar extends Component {
 	constructor(props) {
@@ -32,7 +33,7 @@ class Navbar extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         
-                            {(this.props.loggedIn === false) ? 
+                            {(this.props.authenticated === false) ? 
                                 <ul className="navbar-nav mr-auto">
                                     {unloggedinArray.map(x => (
                                         <li className={window.location.pathname === x.name
