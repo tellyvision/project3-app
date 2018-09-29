@@ -7,10 +7,10 @@ var port = process.env.PORT || 3001;
 
 ///////////MONGO AND PASSPORT
 const passport = require('passport');
-const config = require('./config');
 const app = express()
 
-require('./userServer/models').connect(config.dbUri);
+var dbUri = process.env.MONGODB_URI || "mongodb://localhost/DogShare_Proj3";
+require('./userServer/models').connect(dbUri);
 
 // tell the app to look for static files in these directories
 app.use(express.static('./server/static/'));
