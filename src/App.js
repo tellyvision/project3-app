@@ -17,7 +17,6 @@ import DogRegister from "./pages/DogRegister";
 import DogWalkerBook from "./pages/ProfileDogWalker";
 // import DogOwnerBooking from "./pages/ProfileDogOwner";
 import ProfilePersonDogListing from "./pages/ProfilePersonDogListing";
-// import ProfileDogOwner from "./pages/ProfileDogOwner";
 
 //Passport Related Thing
 import Auth from './modules/Auth';
@@ -67,11 +66,12 @@ class App extends Component {
       email: null,
       user_id: null,
       List: [],
+      // owner_dog_list: []
     }
 
     // this.getUser = this.getUser.bind(this);
     this.updateListFromSearch = this.updateListFromSearch.bind(this);
-    this.getOwnerDogList = this.getOwnerDogList.bind(this);
+    // this.getOwnerDogList = this.getOwnerDogList.bind(this);
 
   }
 
@@ -121,25 +121,28 @@ class App extends Component {
     xhr.send();
   }
 
-  getOwnerDogList() {
-    if(this.state.authenticated === true && this.state.email !== "") {
-      axios.get('http://localhost:3001/api/ownerDogSearch', {
-            params:{
-                userID: this.props.user_id
-            }
-        })
-        .then((res) => {
-            console.log("res owner's dogs: ")
-            console.log(res);
-            let owner_dog_list = res.data;
-            console.log("new owner's doglist state: ");
-            console.log(this.state.ownerDogList);
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
-    }
-  }
+  // getOwnerDogList() {
+  //   if(this.state.loggedIn === true && this.state.username !== "") {
+  //     axios.get('http://localhost:3001/api/ownerDogSearch', {
+  //           params:{
+  //               userID: this.state.user_id
+  //           }
+  //       })
+  //       .then((res) => {
+  //           console.log("res owner's dogs: ")
+  //           console.log(res);
+  //           this.setState({
+  //             owner_dog_list: res.data
+  //           })
+  //           // let owner_dog_list = res.data;
+  //           console.log("new owner's doglist state: ");
+  //           console.log(this.state.owner_dog_list);
+  //       })
+  //       .catch(function(err) {
+  //           console.log(err);
+  //       });
+  //   }
+  // }
 
   updateListFromSearch(dataFromSearch) {
     this.setState({
@@ -162,7 +165,8 @@ class App extends Component {
               <Route path="/logout" component={LogoutFunction}/>
               {/* <Route exact path="/profile" component={ProfilePerson} /> */}
               <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
-              <Route exact path="/your-dog-listing" render={(props) => <ProfilePersonDogListing {...props} user_id = {this.state.user_id} user_dog_list = {this.owner_dog_list}/>} />
+              <Route exact path="/your-dog-listing" render={(props) => <ProfilePersonDogListing {...props} user_id = {this.state.user_id} />} /> 
+              {/* onClick={this.getOwnerDogList} user_dog_list = {this.state.owner_dog_list} */}
               <Route path="/dog-info/*" render={(props) => <DogWalkerBook {...props} picture = "https://ichef.bbci.co.uk/news/660/cpsprodpb/1999/production/_92935560_robot976.jpg" dog_name = "testName" size= "testSize" breed = "testBreed" activeness = "testActiveness" microchip = "1" social_children = "testChildren" social_ppl = "testPeople" social_dog = "testDog" dog_id="testID"/>} />
             </Switch>
           {/* <Footer /> */}  
