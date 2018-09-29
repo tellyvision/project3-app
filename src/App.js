@@ -164,7 +164,7 @@ class App extends Component {
               <Route path="/search" render={(props) => <Search {...props} passDataToApp = {this.updateListFromSearch}/>  }/> 
               <Route path="/*/register" render={(props) => <DogRegister {...props} user_id = {this.state.user_id} />} />
               <Route exact path="/your-dog-listing" render={(props) => <ProfilePersonDogListing {...props} user_id = {this.state.user_id} user_dog_list = {this.owner_dog_list}/>} />
-              <Route path="/dog-info/:dog_id" render={(props) => <DogWalkerBook {...props} history={history} />} />
+              <Route path="/dog-info/:dog_id" render={(props) => <DogWalkerBook {...props} history={history} user_id = {this.state.user_id} />} />
             </Switch>
           {/* <Footer /> */}  
         </div>
