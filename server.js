@@ -5,10 +5,14 @@ var cors = require('cors')
 var path = require('path');
 var port = process.env.PORT || 3001;
 
+var mongoose = require("mongoose");
+
+
 ///////////MONGO AND PASSPORT
 const passport = require('passport');
 const app = express()
 
+app.use(cors());
 var dbUri = process.env.MONGODB_URI || "mongodb://localhost/DogShare_Proj3";
 require('./userServer/models').connect(dbUri);
 
@@ -42,7 +46,9 @@ app.use(body_parser.urlencoded({
   extended: false
 }));
 
-app.use(cors());
+// db
+// mongoose.connect("mongodb://localhost:27017/DogShare_Proj3");
+
 
 // app.use(express.static(path.join(__dirname + '/public')));
 
