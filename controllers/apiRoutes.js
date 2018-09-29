@@ -1,5 +1,9 @@
 var path = require('path');
-var connection = require('../db/connection.js');
+// var connection = require('../db/connection.js');
+var express = require('express');
+
+var Dogs = require('../userServer/models/dog.js');
+var Bookings = require('../userServer/models/booking.js');
 
 module.exports = function(app){
 
@@ -12,18 +16,31 @@ module.exports = function(app){
         console.log(req.query.column);
         console.log(req.query.columnVar);
 
-            let SQLquery = "select * from dogInfo where " + req.query.column + " = " + req.query.columnVar;    
-
-
-            connection.query(SQLquery, (err, data) => {
-                console.log(SQLquery)
-                if(err) {
-                    console.log(err);
-                    return false;
-                }
+        var query = {[req.query.column] : req.query.columnVar};
+        Dogs.find(query)
+        .exec(function(err, data){
+            if(err){
+                console.log('Error: ' + err);
+            } 
+            else {
                 res.json(data);
+                
+            }
 
         });
+
+        //     let SQLquery = "select * from dogInfo where " + req.query.column + " = " + req.query.columnVar;    
+
+
+        //     connection.query(SQLquery, (err, data) => {
+        //         console.log(SQLquery)
+        //         if(err) {
+        //             console.log(err);
+        //             return false;
+        //         }
+        //         res.json(data);
+
+        // });
     });
 
     // get request for get 1 dog info

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 const navStyle= {
-    "backgroundColor": "#e3f2fd",
-    "marginBottom": "15px"
+    "background-color": "#e3f2fd",
+    "margin-bottom": "15px"
 }
 
 const unloggedinArray = [{ name: "Home", url: "/" },
@@ -14,13 +15,32 @@ const unloggedinArray = [{ name: "Home", url: "/" },
 const loggedinArray = [{ name: "Home", url: "/" },
  { name: "Search", url: "/Search" },
  { name: "Profile", url: "/Profile" },
- { name: "Your Dogs", url: "/your-dog-listing" },  //need to change this to below
- { name: "Log Out", url: "/logout" }];
+ { name: "Your Dogs", url: "/your-dog-listing" }]; //need to change this to below
 
 class Navbar extends Component {
 	constructor(props) {
 		super(props);
+        this.logout = this.logout.bind(this);
+        	
 	}
+
+    logout(event) {
+        event.preventDefault()
+        console.log('logging out')
+        axios.post('/user/logout').then(response => {
+            console.log(response.data)
+            if (response.status === 200) {
+                this.props.updateUser({
+                    loggedIn: false,
+                    username: null
+                })
+            }
+        }).catch(error => {
+            console.log('Logout error')
+        })
+    }
+
+    
 
     render() {
         console.log('navbar render, props: ')
@@ -33,7 +53,7 @@ class Navbar extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         
-                            {(this.props.authenticated === false) ? 
+                            {(this.props.loggedIn === false) ? 
                                 <ul className="navbar-nav mr-auto">
                                     {unloggedinArray.map(x => (
                                         <li className={window.location.pathname === x.name
@@ -42,6 +62,7 @@ class Navbar extends Component {
                                         </li>
                                     ))}
                                 </ul>
+                            
                             :   
                                 <ul className="navbar-nav mr-auto"> 
                                 {loggedinArray.map(x => (
@@ -55,9 +76,9 @@ class Navbar extends Component {
                                         : "nav-item nav-link"}><Link to ={x.url}>{x.name}</Link> 
                                     </li>*/}
 
-                                    {/* <li className= "nav-item nav-link">
+                                    <li className= "nav-item nav-link">
                                         <Link to ="/user/logout" onClick={this.logout}>Log Out</Link>
-                                    </li>  */}
+                                    </li> 
                                 </ul>
                             }
                     </div>
