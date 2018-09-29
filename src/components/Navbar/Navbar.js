@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 const navStyle= {
-    "backgroundColor": "#e3f2fd",
-    "marginBottom": "15px"
+    "background-color": "#e3f2fd",
+    "margin-bottom": "15px"
 }
 
 const unloggedinArray = [{ name: "Home", url: "/" },
@@ -14,14 +15,14 @@ const unloggedinArray = [{ name: "Home", url: "/" },
 const loggedinArray = [{ name: "Home", url: "/" },
  { name: "Search", url: "/Search" },
  { name: "Profile", url: "/Profile" },
- { name: "Your Dogs", url: "/your-dog-listing" },  //need to change this to below
- { name: "Log Out", url: "/logout" }];
+ { name: "Your Dogs", url: "/your-dog-listing" },
+ { name: "Log Out", url: "/logout" }] //need to change this to below
 
 class Navbar extends Component {
 	constructor(props) {
 		super(props);
 	}
-
+    
     render() {
         console.log('navbar render, props: ')
         console.log(this.props);
@@ -42,6 +43,7 @@ class Navbar extends Component {
                                         </li>
                                     ))}
                                 </ul>
+                            
                             :   
                                 <ul className="navbar-nav mr-auto"> 
                                 {loggedinArray.map(x => (
@@ -55,9 +57,6 @@ class Navbar extends Component {
                                         : "nav-item nav-link"}><Link to ={x.url}>{x.name}</Link> 
                                     </li>*/}
 
-                                    {/* <li className= "nav-item nav-link">
-                                        <Link to ="/user/logout" onClick={this.logout}>Log Out</Link>
-                                    </li>  */}
                                 </ul>
                             }
                     </div>

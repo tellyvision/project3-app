@@ -66,10 +66,9 @@ class Breed extends Component {
                         <option value="Pinocher">Pinocher</option>
                         <option value="Pomeranian">Pomeranian</option>
                         <option value="Pug">Pug</option>
-                        <option value="retriever">Retriever</option>
+                        <option value="Retriever">Retriever</option>
                         <option value="Sheepdog">Sheepdog</option>
                         <option value="SheppardDog">Sheppard Dog</option>
-                        <option value="Terrier">Terrier</option>
                         <option value="ShihTzu">Shih Tzu</option>
                         <option value="Spaniel">Spaniel</option>
                         <option value="Terrier">Terrier</option>

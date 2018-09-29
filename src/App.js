@@ -55,9 +55,6 @@ const PropsRoute = ({ component: Component, ...rest }) => (
   )}/>
 )
 
-//import logo from './logo.svg';
-//import './App.css';
-
 class App extends Component {
   constructor(props){
     super(props);
@@ -74,7 +71,6 @@ class App extends Component {
     // this.getOwnerDogList = this.getOwnerDogList.bind(this);
 
   }
-
   componentDidMount() {
     // check if user is logged in on refresh
     this.toggleAuthenticateStatus();
@@ -156,7 +152,7 @@ class App extends Component {
     return (
       <BrowserRouter history={history} >
         <div>
-          <Route path="/" render={(props) => <Navbar {...props} authenticated={this.state.authenticated} name={this.state.email}/>} />
+          <Route path="/" render={(props) => <Navbar {...props} authenticated={this.state.authenticated} email={this.state.email}/>} />
             <Switch>
               <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
               <PrivateRoute path="/dashboard" component={DashboardPage}/>

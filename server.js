@@ -5,15 +5,14 @@ var cors = require('cors')
 var path = require('path');
 var port = process.env.PORT || 3001;
 
-///////////MONGO AND PASSPORT
+
 const passport = require('passport');
+const config = require('./config');
 const app = express()
 
-var dbUri = process.env.MONGODB_URI || "mongodb://localhost/DogShare_Proj3";
-require('./userServer/models').connect(dbUri);
+require('./userServer/models').connect(config.dbUri);
 
 // tell the app to look for static files in these directories
-app.use(express.static('./server/static/'));
 app.use(express.static('./dist/'));
 // tell the app to parse HTTP body messages
 app.use(body_parser.urlencoded({ extended: false }));
@@ -43,6 +42,10 @@ app.use(body_parser.urlencoded({
 }));
 
 app.use(cors());
+
+// db
+// mongoose.connect("mongodb://localhost:27017/DogShare_Proj3");
+
 
 // app.use(express.static(path.join(__dirname + '/public')));
 
