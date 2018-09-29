@@ -17,7 +17,6 @@ import DogRegister from "./pages/DogRegister";
 import DogWalkerBook from "./pages/ProfileDogWalker";
 // import DogOwnerBooking from "./pages/ProfileDogOwner";
 import ProfilePersonDogListing from "./pages/ProfilePersonDogListing";
-// import ProfileDogOwner from "./pages/ProfileDogOwner";
 
 //Passport Related Thing
 import Auth from './modules/Auth';
@@ -122,7 +121,6 @@ class App extends Component {
     xhr.send();
   }
 
-<<<<<<< HEAD
   // getOwnerDogList() {
   //   if(this.state.loggedIn === true && this.state.username !== "") {
   //     axios.get('http://localhost:3001/api/ownerDogSearch', {
@@ -145,27 +143,6 @@ class App extends Component {
   //       });
   //   }
   // }
-=======
-  getOwnerDogList() {
-    if(this.state.authenticated === true && this.state.email !== "") {
-      axios.get('http://localhost:3001/api/ownerDogSearch', {
-            params:{
-                userID: this.props.user_id
-            }
-        })
-        .then((res) => {
-            console.log("res owner's dogs: ")
-            console.log(res);
-            let owner_dog_list = res.data;
-            console.log("new owner's doglist state: ");
-            console.log(this.state.ownerDogList);
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
-    }
-  }
->>>>>>> 5b8b19ac3c5dce659a3bc2618c20b6118e604fec
 
   updateListFromSearch(dataFromSearch) {
     this.setState({
