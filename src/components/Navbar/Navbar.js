@@ -47,7 +47,7 @@ class Navbar extends Component {
         console.log(this.props);
             return(
                 <nav className="navbar navbar-expand-lg navbar-light" style={navStyle}>
-                    <Link to ="/" className="navbar-brand">Dogs</Link>
+                    <Link to ="/" className="navbar-brand">Dog Walk</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>

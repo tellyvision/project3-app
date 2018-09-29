@@ -70,6 +70,18 @@ module.exports = function(app){
         });
     });
 
+    //check all availability of selected dogs
+    app.get('/api/availability/:id', function (req, res) {
+        let query = `SELECT * FROM  bookingInfo WHERE booking_dog_id = ${req.params.id} AND borrower_id = null`;
+        connection.query(query, (err, data) => {
+            if (err) {
+                console.log(err);
+                return false;
+            }
+            res.json(data)
+        })
+    })
+
 
     // get request for user information, data used to populate form
     app.get('/api/user-profile', function(req, res) {
@@ -108,7 +120,7 @@ module.exports = function(app){
     // create new booking/meetup - for dog owner
     // owner submit new booking
     app.post('/api/meet-up', function(req, res) {
-        let query = `insert into bookingInfo (booking_dog_id, lender_id, booking_date) values (${req.body})`;
+        let query = `insert into bookingInfo (booking_dog_id, lender_id, booking_date) values (${req.body.dog_id}, ${req.body.lender_id}, ${req.body.booking_id})`;
         console.log(query);
         connection.query(query, (err, data) => {
             if(err) {
@@ -149,7 +161,7 @@ module.exports = function(app){
 
     // updating existing/unfulfilled meetup - for borrower
     app.put('/meet-up/:id', function(req, res) {
-        var query = `update userInfo (lender_id) values () where booking_id = ${req.params.id}`;
+        var query = `update userInfo (lender_id) values (${req.body.user_id}) where booking_id = ${req.params.id}`;
         connection.query(query, (err, data) => {
             if(err) {
                 console.log(err);
